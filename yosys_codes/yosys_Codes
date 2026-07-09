@@ -1,0 +1,5 @@
+yosys -l 01.log -command to take yosys from directory
+type yosys
+csh and source /home/Desktop/SYNOPSYS or Cadence or YOSYS/cshrc to execute the file if in a server
+function : "(!CK & !E & !SE) | (!CK & !E & SE) | (!CK & E & !SE) | (CK & !E & !SE)";
+
