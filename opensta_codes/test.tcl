@@ -1,19 +1,28 @@
+
+#sdf or standard delay format file comes as output from sta tool and used by verification tools for dynamic timing analysis.(calculated rc delays of wires )
+#spef file or standard parasitic exchange format comes output from physical design tool which contain actual parasitic res and cap of nodes in gate and wires.used in post timing analysis
+#timing analysis with spef file reduces the setup slack and hold slack,difference between calculated and original parasitic delay info
+#timing analysis with sdf file timing is fast when compared to spef
+#timing analysis with derate factor help to do analysis using on chip variation
+
+
 read_liberty NangateOpenCellLibrary_low_temp.lib
 read_verilog netlist_final.v
 link_design tx_uart
 read_sdc top.sdc
+#without spef
 report_checks
 report_checks -path_delay max -format full
-#hold time analysis
+#SETUP time analysis
 report_checks -path_delay min -format full
-#setup time analysis
+#HOLD time analysis
 report_checks -path_delay max -digits 4
-#post route analysis
-report_parasitic_annotation #parasitic information gives resistance,capacitance of certain driving nets which are essential to calculate timing calculations
-#spef file contain post route information about parasitic information of interconnects from physical design tool
-read_spef example1.dspef
-report_parasitic_annotation
 
+#post route analysis,spef file contain post route information about parasitic information of interconnects from physical design tool
+report_parasitic_annotation #parasitic information gives resistance,capacitance of certain driving nets which are essential to calculate timing calculations
+read_spef example1.dspef#file from phy syn tool contain rc information
+report_parasitic_annotation#all unannotated nodes and wires will be annotate  now
+report_checks
 report_checks -path_delay max -digits 4 -fields capacitance
 report_checks -path_delay max -digits 4 -fields [list capacitance, slew, input_pins, nets, fanout] #accuracy to 4 digits
 report_checks -path_delay min -digits 4 -fields [list capacitance, slew, input_pins, nets, fanout]
@@ -40,7 +49,6 @@ report_checks -path_delay min_max
 set_timing_derate -early 0.9
 set_timing_derate -late 1.1
 #scales the value of delays of interconnect and cells by increasing or decreasing them. gives optimistic and pessimistic timing analysic. set_clock_uncertainity -clk 5 {in1,in2}
+#set_propagated_clock command used to show clock network delay if clock tree is there
 
-
-report_checks -path_delay max -from _239_/CK
-
+report_checks -path_delay max -from _239_/CK#reg to reg critical patn delay
