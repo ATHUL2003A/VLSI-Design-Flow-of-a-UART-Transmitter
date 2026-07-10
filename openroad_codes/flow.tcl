@@ -61,7 +61,7 @@ remove_buffers
 place_pins -random -hor_layers $io_placer_hor_layer -ver_layers $io_placer_ver_layer
 
 ################################################################
-# Macro Placement
+# Macro Placement means any memory blocks or ip bought from any 3rd party.these to be fxed 
 if { [have_macros] } {
   lassign $macro_place_halo halo_x halo_y
   set report_dir [make_result_file ${design}_${platform}_rtlmp]
@@ -70,7 +70,7 @@ if { [have_macros] } {
 }
 
 ################################################################
-# Tapcell insertion
+# Tapcell insertion ,they are bodycontacts.If tapcell not inserted NMOS body not connected to VDD and PMOS not connected to ground. This cause problem
 eval tapcell $tapcell_args
 
 ################################################################
@@ -81,46 +81,46 @@ pdngen
 ################################################################
 # Global placement
 
-foreach layer_adjustment $global_routing_layer_adjustments {
+foreach layer_adjustment $global_routing_layer_adjustments { 
   lassign $layer_adjustment layer adjustment
-  set_global_routing_layer_adjustment $layer $adjustment
+  set_global_routing_layer_adjustment $layer $adjustment #here the routing track length in each layer is adjusted or reduced
 }
 set_routing_layers -signal $global_routing_layers \
   -clock $global_routing_clock_layers
 set_macro_extension 2
 
-global_placement -routability_driven -density $global_place_density \
-  -pad_left $global_place_pad -pad_right $global_place_pad
+global_placement -routability_driven -density $global_place_density \#here placement is driven by routability(to reduce wire length) it can be also timing driven
+  -pad_left $global_place_pad -pad_right $global_place_pad #padding refer how much space should be given in right and left of cells to avoid congestion because of pin density
 
 # IO Placement
-place_pins -hor_layers $io_placer_hor_layer -ver_layers $io_placer_ver_layer
+place_pins -hor_layers $io_placer_hor_layer -ver_layers $io_placer_ver_layer#based on routing tracks available near to cells 
 
-# checkpoint
+# checkpoint to save upto current status as db file
 set global_place_db [make_result_file ${design}_${platform}_global_place.db]
 write_db $global_place_db
 
 ################################################################
-# Repair max slew/cap/fanout violations and normalize slews
-source $layer_rc_file
+# Repair max slew/cap/fanout violations and normalize slews,PRE CTS
+source $layer_rc_file#source rc file given by fab along with library,contain rc info of each layer and check timing is met
 set_wire_rc -signal -layer $wire_rc_layer
 set_wire_rc -clock  -layer $wire_rc_layer_clk
 set_dont_use $dont_use
 
-estimate_parasitics -placement
+estimate_parasitics -placement#estimate the current std cell and io pin placement parasitics
 
 repair_design -slew_margin $slew_margin -cap_margin $cap_margin
 
 repair_tie_fanout -separation $tie_separation $tielo_port
-repair_tie_fanout -separation $tie_separation $tiehi_port
+repair_tie_fanout -separation $tie_separation $tiehi_port#repair any slew issues and time issues,might change io or std cell placement
 
 set_placement_padding -global -left $detail_place_pad -right $detail_place_pad
-detailed_placement
+detailed_placement#here overlapping standard cells,std cells crossing rectangular bins in core area will be changed all will be perfectly aligned
 
-# post resize timing report (ideal clocks)
-report_worst_slack -min -digits 3
-report_worst_slack -max -digits 3
-report_tns -digits 3
-# Check slew repair
+# post resize timing report (ideal clocks) after detailed placement check for any timing issues and repair
+report_worst_slack -min -digits 3#actually done post CTS
+report_worst_slack -max -digits 3#setup timing analysis
+report_tns -digits 3#TOTAL NEGATIVE Slack
+# Check slew repair,repair all negative slacks
 report_check_types -max_slew -max_capacitance -max_fanout -violators
 
 utl::metric "RSZ::repair_design_buffer_count" [rsz::repair_design_buffer_count]
@@ -150,7 +150,7 @@ set cts_db [make_result_file ${design}_${platform}_cts.db]
 write_db $cts_db
 
 ################################################################
-# Setup/hold timing repair
+# Setup/hold timing repair post CTS
 
 set_propagated_clock [all_clocks]
 
@@ -192,10 +192,10 @@ set dpl_db [make_result_file ${design}_${platform}_dpl.db]
 write_db $dpl_db
 
 set verilog_file [make_result_file ${design}_${platform}.v]
-write_verilog $verilog_file
+write_verilog $verilog_file#give new verilog file with gatelevel netlist and clock tree used for lvs,drc,gdsII
 
 ################################################################
-# Global routing
+# Global routing,set min and max routing layers
 
 pin_access -bottom_routing_layer $min_routing_layer \
            -top_routing_layer $max_routing_layer
@@ -208,7 +208,7 @@ set verilog_file [make_result_file ${design}_${platform}.v]
 write_verilog -remove_cells $filler_cells $verilog_file
 
 ################################################################
-# Repair antennas post-GRT
+# Repair antennas post-GRT,if any long interconnect is connected to gate of mosfet,antenna violation occur
 
 utl::set_metrics_stage "grt__{}"
 repair_antennas -iterations 5
@@ -218,7 +218,7 @@ utl::clear_metrics_stage
 utl::metric "GRT::ANT::errors" [ant::antenna_violation_count]
 
 
-#filler cell insertion
+#filler cell insertion,to fill up empty space to provide continuity in power supply
 filler_placement $filler_cells
 check_placement -verbose
 ################################################################
@@ -290,7 +290,7 @@ set fill_db [make_result_file ${design}_${platform}_fill.db]
 write_db $fill_db
 
 ################################################################
-# Extraction
+# Extraction,here extraction of SPEF File needed for STA Tool
 
 if { $rcx_rules_file != "" } {
   define_process_corner -ext_model_index 0 X
