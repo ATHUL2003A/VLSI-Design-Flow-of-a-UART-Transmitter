@@ -39,7 +39,7 @@ reg uclk=0;
 integer count = 0;
 always@(posedge clk)
     begin
-      if(count < clkcount/2)
+      if(count < clkcount/2-1)
          count <= count + 1;
       else begin
         count <= 0;
@@ -52,7 +52,7 @@ always@(posedge clk)
 
 
 
-always@ (posedge clk) begin
+always@ (posedge uclk) begin
 if (rst_n==1)
 begin
 bit_cnt<=4'd0;
@@ -63,45 +63,45 @@ end
 end 
 
 always @(*) begin
-rs232_tx <= 1'b1;
-done_tx<=1'b0;
-bit_cnta<=bit_cnt;
+rs232_tx = 1'b1;
+done_tx=1'b0;
+bit_cnta=bit_cnt;
 case(bit_cnt)
 4'd0: begin
-      done_tx<=1'b0; 
-      rs232_tx <= 1'b0;
-      bit_cnta<=bit_cnt+1'b1;
+      done_tx=1'b0; 
+      rs232_tx = 1'b0;
+      bit_cnta=bit_cnt+1'b1;
       end
-4'd1: begin rs232_tx <= data[0];
-      bit_cnta<=bit_cnt+1'b1;
+4'd1: begin rs232_tx = data[0];
+      bit_cnta=bit_cnt+1'b1;
       end
-4'd2: begin rs232_tx <= data[1];
-      bit_cnta<=bit_cnt+1'b1;
+4'd2: begin rs232_tx = data[1];
+      bit_cnta=bit_cnt+1'b1;
       end
-4'd3: begin rs232_tx <= data[2];
-      bit_cnta<=bit_cnt+1'b1;
+4'd3: begin rs232_tx = data[2];
+      bit_cnta=bit_cnt+1'b1;
       end
-4'd4: begin rs232_tx <= data[3];
-      bit_cnta<=bit_cnt+1'b1;
+4'd4: begin rs232_tx = data[3];
+      bit_cnta=bit_cnt+1'b1;
       end
-4'd5: begin rs232_tx <= data[4];
-      bit_cnta<=bit_cnt+1'b1;
+4'd5: begin rs232_tx = data[4];
+      bit_cnta=bit_cnt+1'b1;
       end
-4'd6: begin rs232_tx <= data[5];
-      bit_cnta<=bit_cnt+1'b1;
+4'd6: begin rs232_tx = data[5];
+      bit_cnta=bit_cnt+1'b1;
       end
-4'd7: begin rs232_tx <= data[6];
-      bit_cnta<=bit_cnt+1'b1;
+4'd7: begin rs232_tx = data[6];
+      bit_cnta=bit_cnt+1'b1;
       end
-4'd8: begin rs232_tx <= data[7];
-      bit_cnta<=bit_cnt+1'b1;
+4'd8: begin rs232_tx = data[7];
+      bit_cnta=bit_cnt+1'b1;
       end
 4'd9:begin
-     rs232_tx <= 1'b1;
-     done_tx<=1'b1;
-     bit_cnta<=0;
+     rs232_tx = 1'b1;
+     done_tx=1'b1;
+     bit_cnta=0;
      end
-default:rs232_tx <= 1'b1;
+default:rs232_tx = 1'b1;
 endcase
 end
 endmodule
