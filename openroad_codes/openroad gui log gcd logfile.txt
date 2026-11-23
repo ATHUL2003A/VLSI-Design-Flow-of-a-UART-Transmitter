@@ -1,2 +1,0 @@
-openroad -gui -log gcd_logfile.log
-
