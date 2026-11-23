@@ -1,0 +1,3268 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.38+37 (git sha1 42920c9bc, clang 14.0.0-1ubuntu1.1 -fPIC -Os)
+
+
+-- Executing script file `opt.tcl' --
+
+1. Executing Liberty frontend: /home/ab2003ab/Desktop/NPTEL/OpenROAD/test/Nangate45/Nangate45_typ.lib
+Imported 134 cell types from liberty file.
+
+2. Executing Verilog-2005 frontend: uart_transmitter.v
+Parsing Verilog input from `uart_transmitter.v' to AST representation.
+Generating RTLIL representation for module `\tx_uart'.
+Successfully finished Verilog frontend.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$uart_transmitter.v:65$819 in module tx_uart.
+Marked 1 switch rules as full_case in process $proc$uart_transmitter.v:55$817 in module tx_uart.
+Marked 1 switch rules as full_case in process $proc$uart_transmitter.v:40$813 in module tx_uart.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 3 redundant assignments.
+Promoted 2 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+Found init rule in `\tx_uart.$proc$uart_transmitter.v:39$830'.
+  Set init value: \count = 0
+Found init rule in `\tx_uart.$proc$uart_transmitter.v:38$829'.
+  Set init value: \uclk = 1'0
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~3 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\tx_uart.$proc$uart_transmitter.v:39$830'.
+Creating decoders for process `\tx_uart.$proc$uart_transmitter.v:38$829'.
+Creating decoders for process `\tx_uart.$proc$uart_transmitter.v:65$819'.
+     1/3: $0\rs232_tx[0:0]
+     2/3: $0\bit_cnta[3:0]
+     3/3: $0\done_tx[0:0]
+Creating decoders for process `\tx_uart.$proc$uart_transmitter.v:55$817'.
+     1/1: $0\bit_cnt[3:0]
+Creating decoders for process `\tx_uart.$proc$uart_transmitter.v:40$813'.
+     1/2: $0\count[31:0]
+     2/2: $0\uclk[0:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\tx_uart.\rs232_tx' from process `\tx_uart.$proc$uart_transmitter.v:65$819'.
+No latch inferred for signal `\tx_uart.\done_tx' from process `\tx_uart.$proc$uart_transmitter.v:65$819'.
+No latch inferred for signal `\tx_uart.\bit_cnta' from process `\tx_uart.$proc$uart_transmitter.v:65$819'.
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\tx_uart.\bit_cnt' using process `\tx_uart.$proc$uart_transmitter.v:55$817'.
+  created $dff cell `$procdff$867' with positive edge clock.
+Creating register for signal `\tx_uart.\uclk' using process `\tx_uart.$proc$uart_transmitter.v:40$813'.
+  created $dff cell `$procdff$868' with positive edge clock.
+Creating register for signal `\tx_uart.\count' using process `\tx_uart.$proc$uart_transmitter.v:40$813'.
+  created $dff cell `$procdff$869' with positive edge clock.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `tx_uart.$proc$uart_transmitter.v:39$830'.
+Removing empty process `tx_uart.$proc$uart_transmitter.v:38$829'.
+Found and cleaned up 1 empty switch in `\tx_uart.$proc$uart_transmitter.v:65$819'.
+Removing empty process `tx_uart.$proc$uart_transmitter.v:65$819'.
+Found and cleaned up 1 empty switch in `\tx_uart.$proc$uart_transmitter.v:55$817'.
+Removing empty process `tx_uart.$proc$uart_transmitter.v:55$817'.
+Found and cleaned up 1 empty switch in `\tx_uart.$proc$uart_transmitter.v:40$813'.
+Removing empty process `tx_uart.$proc$uart_transmitter.v:40$813'.
+Cleaned up 3 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module tx_uart.
+<suppressed ~3 debug messages>
+Optimizing module XOR2_X2.
+Optimizing module XOR2_X1.
+Optimizing module XNOR2_X2.
+Optimizing module XNOR2_X1.
+Optimizing module TLAT_X1.
+Optimizing module TINV_X1.
+Optimizing module TBUF_X16.
+Optimizing module TBUF_X8.
+Optimizing module TBUF_X4.
+Optimizing module TBUF_X2.
+Optimizing module TBUF_X1.
+Optimizing module SDFF_X2.
+Optimizing module SDFF_X1.
+Optimizing module SDFFS_X2.
+Optimizing module SDFFS_X1.
+Optimizing module SDFFR_X2.
+Optimizing module SDFFR_X1.
+Optimizing module SDFFRS_X2.
+Optimizing module SDFFRS_X1.
+Optimizing module OR4_X4.
+Optimizing module OR4_X2.
+Optimizing module OR4_X1.
+Optimizing module OR3_X4.
+Optimizing module OR3_X2.
+Optimizing module OR3_X1.
+Optimizing module OR2_X4.
+Optimizing module OR2_X2.
+Optimizing module OR2_X1.
+Optimizing module OAI222_X4.
+<suppressed ~1 debug messages>
+Optimizing module OAI222_X2.
+Optimizing module OAI222_X1.
+Optimizing module OAI221_X4.
+<suppressed ~1 debug messages>
+Optimizing module OAI221_X2.
+Optimizing module OAI221_X1.
+Optimizing module OAI211_X4.
+Optimizing module OAI211_X2.
+Optimizing module OAI211_X1.
+Optimizing module OAI33_X1.
+Optimizing module OAI22_X4.
+Optimizing module OAI22_X2.
+Optimizing module OAI22_X1.
+Optimizing module OAI21_X4.
+Optimizing module OAI21_X2.
+Optimizing module OAI21_X1.
+Optimizing module NOR4_X4.
+Optimizing module NOR4_X2.
+Optimizing module NOR4_X1.
+Optimizing module NOR3_X4.
+Optimizing module NOR3_X2.
+Optimizing module NOR3_X1.
+Optimizing module NOR2_X4.
+Optimizing module NOR2_X2.
+Optimizing module NOR2_X1.
+Optimizing module NAND4_X4.
+Optimizing module NAND4_X2.
+Optimizing module NAND4_X1.
+Optimizing module NAND3_X4.
+Optimizing module NAND3_X2.
+Optimizing module NAND3_X1.
+Optimizing module NAND2_X4.
+Optimizing module NAND2_X2.
+Optimizing module NAND2_X1.
+Optimizing module MUX2_X2.
+Optimizing module MUX2_X1.
+Optimizing module LOGIC1_X1.
+Optimizing module LOGIC0_X1.
+Optimizing module INV_X32.
+Optimizing module INV_X16.
+Optimizing module INV_X8.
+Optimizing module INV_X4.
+Optimizing module INV_X2.
+Optimizing module INV_X1.
+Optimizing module HA_X1.
+Optimizing module FILLCELL_X32.
+Optimizing module FILLCELL_X16.
+Optimizing module FILLCELL_X8.
+Optimizing module FILLCELL_X4.
+Optimizing module FILLCELL_X2.
+Optimizing module FILLCELL_X1.
+Optimizing module FA_X1.
+Optimizing module DLL_X2.
+Optimizing module DLL_X1.
+Optimizing module DLH_X2.
+Optimizing module DLH_X1.
+Optimizing module DFF_X2.
+Optimizing module DFF_X1.
+Optimizing module DFFS_X2.
+Optimizing module DFFS_X1.
+Optimizing module DFFR_X2.
+Optimizing module DFFR_X1.
+Optimizing module DFFRS_X2.
+Optimizing module DFFRS_X1.
+Optimizing module CLKGATE_X8.
+Optimizing module CLKGATE_X4.
+Optimizing module CLKGATE_X2.
+Optimizing module CLKGATE_X1.
+Optimizing module CLKGATETST_X8.
+Optimizing module CLKGATETST_X4.
+Optimizing module CLKGATETST_X2.
+Optimizing module CLKGATETST_X1.
+Optimizing module CLKBUF_X3.
+Optimizing module CLKBUF_X2.
+Optimizing module CLKBUF_X1.
+Optimizing module BUF_X32.
+Optimizing module BUF_X16.
+Optimizing module BUF_X8.
+Optimizing module BUF_X4.
+Optimizing module BUF_X2.
+Optimizing module BUF_X1.
+Optimizing module AOI222_X4.
+<suppressed ~1 debug messages>
+Optimizing module AOI222_X2.
+Optimizing module AOI222_X1.
+Optimizing module AOI221_X4.
+<suppressed ~1 debug messages>
+Optimizing module AOI221_X2.
+Optimizing module AOI221_X1.
+Optimizing module AOI211_X4.
+<suppressed ~1 debug messages>
+Optimizing module AOI211_X2.
+Optimizing module AOI211_X1.
+Optimizing module AOI22_X4.
+Optimizing module AOI22_X2.
+Optimizing module AOI22_X1.
+Optimizing module AOI21_X4.
+Optimizing module AOI21_X2.
+Optimizing module AOI21_X1.
+Optimizing module ANTENNA_X1.
+Optimizing module AND4_X4.
+Optimizing module AND4_X2.
+Optimizing module AND4_X1.
+Optimizing module AND3_X4.
+Optimizing module AND3_X2.
+Optimizing module AND3_X1.
+Optimizing module AND2_X4.
+Optimizing module AND2_X2.
+Optimizing module AND2_X1.
+Removed 35 unused cells and 155 unused wires.
+
+4. Executing MEMORY pass.
+
+4.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+4.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+4.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+4.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+4.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+4.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \AND2_X1..
+Finding unused cells or wires in module \AND2_X2..
+Finding unused cells or wires in module \AND2_X4..
+Finding unused cells or wires in module \AND3_X1..
+Finding unused cells or wires in module \AND3_X2..
+Finding unused cells or wires in module \AND3_X4..
+Finding unused cells or wires in module \AND4_X1..
+Finding unused cells or wires in module \AND4_X2..
+Finding unused cells or wires in module \AND4_X4..
+Finding unused cells or wires in module \ANTENNA_X1..
+Finding unused cells or wires in module \AOI211_X1..
+Finding unused cells or wires in module \AOI211_X2..
+Finding unused cells or wires in module \AOI211_X4..
+Finding unused cells or wires in module \AOI21_X1..
+Finding unused cells or wires in module \AOI21_X2..
+Finding unused cells or wires in module \AOI21_X4..
+Finding unused cells or wires in module \AOI221_X1..
+Finding unused cells or wires in module \AOI221_X2..
+Finding unused cells or wires in module \AOI221_X4..
+Finding unused cells or wires in module \AOI222_X1..
+Finding unused cells or wires in module \AOI222_X2..
+Finding unused cells or wires in module \AOI222_X4..
+Finding unused cells or wires in module \AOI22_X1..
+Finding unused cells or wires in module \AOI22_X2..
+Finding unused cells or wires in module \AOI22_X4..
+Finding unused cells or wires in module \BUF_X1..
+Finding unused cells or wires in module \BUF_X16..
+Finding unused cells or wires in module \BUF_X2..
+Finding unused cells or wires in module \BUF_X32..
+Finding unused cells or wires in module \BUF_X4..
+Finding unused cells or wires in module \BUF_X8..
+Finding unused cells or wires in module \CLKBUF_X1..
+Finding unused cells or wires in module \CLKBUF_X2..
+Finding unused cells or wires in module \CLKBUF_X3..
+Finding unused cells or wires in module \CLKGATETST_X1..
+Finding unused cells or wires in module \CLKGATETST_X2..
+Finding unused cells or wires in module \CLKGATETST_X4..
+Finding unused cells or wires in module \CLKGATETST_X8..
+Finding unused cells or wires in module \CLKGATE_X1..
+Finding unused cells or wires in module \CLKGATE_X2..
+Finding unused cells or wires in module \CLKGATE_X4..
+Finding unused cells or wires in module \CLKGATE_X8..
+Finding unused cells or wires in module \DFFRS_X1..
+Finding unused cells or wires in module \DFFRS_X2..
+Finding unused cells or wires in module \DFFR_X1..
+Finding unused cells or wires in module \DFFR_X2..
+Finding unused cells or wires in module \DFFS_X1..
+Finding unused cells or wires in module \DFFS_X2..
+Finding unused cells or wires in module \DFF_X1..
+Finding unused cells or wires in module \DFF_X2..
+Finding unused cells or wires in module \DLH_X1..
+Finding unused cells or wires in module \DLH_X2..
+Finding unused cells or wires in module \DLL_X1..
+Finding unused cells or wires in module \DLL_X2..
+Finding unused cells or wires in module \FA_X1..
+Finding unused cells or wires in module \FILLCELL_X1..
+Finding unused cells or wires in module \FILLCELL_X16..
+Finding unused cells or wires in module \FILLCELL_X2..
+Finding unused cells or wires in module \FILLCELL_X32..
+Finding unused cells or wires in module \FILLCELL_X4..
+Finding unused cells or wires in module \FILLCELL_X8..
+Finding unused cells or wires in module \HA_X1..
+Finding unused cells or wires in module \INV_X1..
+Finding unused cells or wires in module \INV_X16..
+Finding unused cells or wires in module \INV_X2..
+Finding unused cells or wires in module \INV_X32..
+Finding unused cells or wires in module \INV_X4..
+Finding unused cells or wires in module \INV_X8..
+Finding unused cells or wires in module \LOGIC0_X1..
+Finding unused cells or wires in module \LOGIC1_X1..
+Finding unused cells or wires in module \MUX2_X1..
+Finding unused cells or wires in module \MUX2_X2..
+Finding unused cells or wires in module \NAND2_X1..
+Finding unused cells or wires in module \NAND2_X2..
+Finding unused cells or wires in module \NAND2_X4..
+Finding unused cells or wires in module \NAND3_X1..
+Finding unused cells or wires in module \NAND3_X2..
+Finding unused cells or wires in module \NAND3_X4..
+Finding unused cells or wires in module \NAND4_X1..
+Finding unused cells or wires in module \NAND4_X2..
+Finding unused cells or wires in module \NAND4_X4..
+Finding unused cells or wires in module \NOR2_X1..
+Finding unused cells or wires in module \NOR2_X2..
+Finding unused cells or wires in module \NOR2_X4..
+Finding unused cells or wires in module \NOR3_X1..
+Finding unused cells or wires in module \NOR3_X2..
+Finding unused cells or wires in module \NOR3_X4..
+Finding unused cells or wires in module \NOR4_X1..
+Finding unused cells or wires in module \NOR4_X2..
+Finding unused cells or wires in module \NOR4_X4..
+Finding unused cells or wires in module \OAI211_X1..
+Finding unused cells or wires in module \OAI211_X2..
+Finding unused cells or wires in module \OAI211_X4..
+Finding unused cells or wires in module \OAI21_X1..
+Finding unused cells or wires in module \OAI21_X2..
+Finding unused cells or wires in module \OAI21_X4..
+Finding unused cells or wires in module \OAI221_X1..
+Finding unused cells or wires in module \OAI221_X2..
+Finding unused cells or wires in module \OAI221_X4..
+Finding unused cells or wires in module \OAI222_X1..
+Finding unused cells or wires in module \OAI222_X2..
+Finding unused cells or wires in module \OAI222_X4..
+Finding unused cells or wires in module \OAI22_X1..
+Finding unused cells or wires in module \OAI22_X2..
+Finding unused cells or wires in module \OAI22_X4..
+Finding unused cells or wires in module \OAI33_X1..
+Finding unused cells or wires in module \OR2_X1..
+Finding unused cells or wires in module \OR2_X2..
+Finding unused cells or wires in module \OR2_X4..
+Finding unused cells or wires in module \OR3_X1..
+Finding unused cells or wires in module \OR3_X2..
+Finding unused cells or wires in module \OR3_X4..
+Finding unused cells or wires in module \OR4_X1..
+Finding unused cells or wires in module \OR4_X2..
+Finding unused cells or wires in module \OR4_X4..
+Finding unused cells or wires in module \SDFFRS_X1..
+Finding unused cells or wires in module \SDFFRS_X2..
+Finding unused cells or wires in module \SDFFR_X1..
+Finding unused cells or wires in module \SDFFR_X2..
+Finding unused cells or wires in module \SDFFS_X1..
+Finding unused cells or wires in module \SDFFS_X2..
+Finding unused cells or wires in module \SDFF_X1..
+Finding unused cells or wires in module \SDFF_X2..
+Finding unused cells or wires in module \TBUF_X1..
+Finding unused cells or wires in module \TBUF_X16..
+Finding unused cells or wires in module \TBUF_X2..
+Finding unused cells or wires in module \TBUF_X4..
+Finding unused cells or wires in module \TBUF_X8..
+Finding unused cells or wires in module \TINV_X1..
+Finding unused cells or wires in module \TLAT_X1..
+Finding unused cells or wires in module \XNOR2_X1..
+Finding unused cells or wires in module \XNOR2_X2..
+Finding unused cells or wires in module \XOR2_X1..
+Finding unused cells or wires in module \XOR2_X2..
+Finding unused cells or wires in module \tx_uart..
+
+4.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+4.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+4.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \AND2_X1..
+Finding unused cells or wires in module \AND2_X2..
+Finding unused cells or wires in module \AND2_X4..
+Finding unused cells or wires in module \AND3_X1..
+Finding unused cells or wires in module \AND3_X2..
+Finding unused cells or wires in module \AND3_X4..
+Finding unused cells or wires in module \AND4_X1..
+Finding unused cells or wires in module \AND4_X2..
+Finding unused cells or wires in module \AND4_X4..
+Finding unused cells or wires in module \ANTENNA_X1..
+Finding unused cells or wires in module \AOI211_X1..
+Finding unused cells or wires in module \AOI211_X2..
+Finding unused cells or wires in module \AOI211_X4..
+Finding unused cells or wires in module \AOI21_X1..
+Finding unused cells or wires in module \AOI21_X2..
+Finding unused cells or wires in module \AOI21_X4..
+Finding unused cells or wires in module \AOI221_X1..
+Finding unused cells or wires in module \AOI221_X2..
+Finding unused cells or wires in module \AOI221_X4..
+Finding unused cells or wires in module \AOI222_X1..
+Finding unused cells or wires in module \AOI222_X2..
+Finding unused cells or wires in module \AOI222_X4..
+Finding unused cells or wires in module \AOI22_X1..
+Finding unused cells or wires in module \AOI22_X2..
+Finding unused cells or wires in module \AOI22_X4..
+Finding unused cells or wires in module \BUF_X1..
+Finding unused cells or wires in module \BUF_X16..
+Finding unused cells or wires in module \BUF_X2..
+Finding unused cells or wires in module \BUF_X32..
+Finding unused cells or wires in module \BUF_X4..
+Finding unused cells or wires in module \BUF_X8..
+Finding unused cells or wires in module \CLKBUF_X1..
+Finding unused cells or wires in module \CLKBUF_X2..
+Finding unused cells or wires in module \CLKBUF_X3..
+Finding unused cells or wires in module \CLKGATETST_X1..
+Finding unused cells or wires in module \CLKGATETST_X2..
+Finding unused cells or wires in module \CLKGATETST_X4..
+Finding unused cells or wires in module \CLKGATETST_X8..
+Finding unused cells or wires in module \CLKGATE_X1..
+Finding unused cells or wires in module \CLKGATE_X2..
+Finding unused cells or wires in module \CLKGATE_X4..
+Finding unused cells or wires in module \CLKGATE_X8..
+Finding unused cells or wires in module \DFFRS_X1..
+Finding unused cells or wires in module \DFFRS_X2..
+Finding unused cells or wires in module \DFFR_X1..
+Finding unused cells or wires in module \DFFR_X2..
+Finding unused cells or wires in module \DFFS_X1..
+Finding unused cells or wires in module \DFFS_X2..
+Finding unused cells or wires in module \DFF_X1..
+Finding unused cells or wires in module \DFF_X2..
+Finding unused cells or wires in module \DLH_X1..
+Finding unused cells or wires in module \DLH_X2..
+Finding unused cells or wires in module \DLL_X1..
+Finding unused cells or wires in module \DLL_X2..
+Finding unused cells or wires in module \FA_X1..
+Finding unused cells or wires in module \FILLCELL_X1..
+Finding unused cells or wires in module \FILLCELL_X16..
+Finding unused cells or wires in module \FILLCELL_X2..
+Finding unused cells or wires in module \FILLCELL_X32..
+Finding unused cells or wires in module \FILLCELL_X4..
+Finding unused cells or wires in module \FILLCELL_X8..
+Finding unused cells or wires in module \HA_X1..
+Finding unused cells or wires in module \INV_X1..
+Finding unused cells or wires in module \INV_X16..
+Finding unused cells or wires in module \INV_X2..
+Finding unused cells or wires in module \INV_X32..
+Finding unused cells or wires in module \INV_X4..
+Finding unused cells or wires in module \INV_X8..
+Finding unused cells or wires in module \LOGIC0_X1..
+Finding unused cells or wires in module \LOGIC1_X1..
+Finding unused cells or wires in module \MUX2_X1..
+Finding unused cells or wires in module \MUX2_X2..
+Finding unused cells or wires in module \NAND2_X1..
+Finding unused cells or wires in module \NAND2_X2..
+Finding unused cells or wires in module \NAND2_X4..
+Finding unused cells or wires in module \NAND3_X1..
+Finding unused cells or wires in module \NAND3_X2..
+Finding unused cells or wires in module \NAND3_X4..
+Finding unused cells or wires in module \NAND4_X1..
+Finding unused cells or wires in module \NAND4_X2..
+Finding unused cells or wires in module \NAND4_X4..
+Finding unused cells or wires in module \NOR2_X1..
+Finding unused cells or wires in module \NOR2_X2..
+Finding unused cells or wires in module \NOR2_X4..
+Finding unused cells or wires in module \NOR3_X1..
+Finding unused cells or wires in module \NOR3_X2..
+Finding unused cells or wires in module \NOR3_X4..
+Finding unused cells or wires in module \NOR4_X1..
+Finding unused cells or wires in module \NOR4_X2..
+Finding unused cells or wires in module \NOR4_X4..
+Finding unused cells or wires in module \OAI211_X1..
+Finding unused cells or wires in module \OAI211_X2..
+Finding unused cells or wires in module \OAI211_X4..
+Finding unused cells or wires in module \OAI21_X1..
+Finding unused cells or wires in module \OAI21_X2..
+Finding unused cells or wires in module \OAI21_X4..
+Finding unused cells or wires in module \OAI221_X1..
+Finding unused cells or wires in module \OAI221_X2..
+Finding unused cells or wires in module \OAI221_X4..
+Finding unused cells or wires in module \OAI222_X1..
+Finding unused cells or wires in module \OAI222_X2..
+Finding unused cells or wires in module \OAI222_X4..
+Finding unused cells or wires in module \OAI22_X1..
+Finding unused cells or wires in module \OAI22_X2..
+Finding unused cells or wires in module \OAI22_X4..
+Finding unused cells or wires in module \OAI33_X1..
+Finding unused cells or wires in module \OR2_X1..
+Finding unused cells or wires in module \OR2_X2..
+Finding unused cells or wires in module \OR2_X4..
+Finding unused cells or wires in module \OR3_X1..
+Finding unused cells or wires in module \OR3_X2..
+Finding unused cells or wires in module \OR3_X4..
+Finding unused cells or wires in module \OR4_X1..
+Finding unused cells or wires in module \OR4_X2..
+Finding unused cells or wires in module \OR4_X4..
+Finding unused cells or wires in module \SDFFRS_X1..
+Finding unused cells or wires in module \SDFFRS_X2..
+Finding unused cells or wires in module \SDFFR_X1..
+Finding unused cells or wires in module \SDFFR_X2..
+Finding unused cells or wires in module \SDFFS_X1..
+Finding unused cells or wires in module \SDFFS_X2..
+Finding unused cells or wires in module \SDFF_X1..
+Finding unused cells or wires in module \SDFF_X2..
+Finding unused cells or wires in module \TBUF_X1..
+Finding unused cells or wires in module \TBUF_X16..
+Finding unused cells or wires in module \TBUF_X2..
+Finding unused cells or wires in module \TBUF_X4..
+Finding unused cells or wires in module \TBUF_X8..
+Finding unused cells or wires in module \TINV_X1..
+Finding unused cells or wires in module \TLAT_X1..
+Finding unused cells or wires in module \XNOR2_X1..
+Finding unused cells or wires in module \XNOR2_X2..
+Finding unused cells or wires in module \XOR2_X1..
+Finding unused cells or wires in module \XOR2_X2..
+Finding unused cells or wires in module \tx_uart..
+
+4.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+4.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+5. Executing FSM pass (extract and optimize FSM).
+
+5.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+5.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \AND2_X1..
+Finding unused cells or wires in module \AND2_X2..
+Finding unused cells or wires in module \AND2_X4..
+Finding unused cells or wires in module \AND3_X1..
+Finding unused cells or wires in module \AND3_X2..
+Finding unused cells or wires in module \AND3_X4..
+Finding unused cells or wires in module \AND4_X1..
+Finding unused cells or wires in module \AND4_X2..
+Finding unused cells or wires in module \AND4_X4..
+Finding unused cells or wires in module \ANTENNA_X1..
+Finding unused cells or wires in module \AOI211_X1..
+Finding unused cells or wires in module \AOI211_X2..
+Finding unused cells or wires in module \AOI211_X4..
+Finding unused cells or wires in module \AOI21_X1..
+Finding unused cells or wires in module \AOI21_X2..
+Finding unused cells or wires in module \AOI21_X4..
+Finding unused cells or wires in module \AOI221_X1..
+Finding unused cells or wires in module \AOI221_X2..
+Finding unused cells or wires in module \AOI221_X4..
+Finding unused cells or wires in module \AOI222_X1..
+Finding unused cells or wires in module \AOI222_X2..
+Finding unused cells or wires in module \AOI222_X4..
+Finding unused cells or wires in module \AOI22_X1..
+Finding unused cells or wires in module \AOI22_X2..
+Finding unused cells or wires in module \AOI22_X4..
+Finding unused cells or wires in module \BUF_X1..
+Finding unused cells or wires in module \BUF_X16..
+Finding unused cells or wires in module \BUF_X2..
+Finding unused cells or wires in module \BUF_X32..
+Finding unused cells or wires in module \BUF_X4..
+Finding unused cells or wires in module \BUF_X8..
+Finding unused cells or wires in module \CLKBUF_X1..
+Finding unused cells or wires in module \CLKBUF_X2..
+Finding unused cells or wires in module \CLKBUF_X3..
+Finding unused cells or wires in module \CLKGATETST_X1..
+Finding unused cells or wires in module \CLKGATETST_X2..
+Finding unused cells or wires in module \CLKGATETST_X4..
+Finding unused cells or wires in module \CLKGATETST_X8..
+Finding unused cells or wires in module \CLKGATE_X1..
+Finding unused cells or wires in module \CLKGATE_X2..
+Finding unused cells or wires in module \CLKGATE_X4..
+Finding unused cells or wires in module \CLKGATE_X8..
+Finding unused cells or wires in module \DFFRS_X1..
+Finding unused cells or wires in module \DFFRS_X2..
+Finding unused cells or wires in module \DFFR_X1..
+Finding unused cells or wires in module \DFFR_X2..
+Finding unused cells or wires in module \DFFS_X1..
+Finding unused cells or wires in module \DFFS_X2..
+Finding unused cells or wires in module \DFF_X1..
+Finding unused cells or wires in module \DFF_X2..
+Finding unused cells or wires in module \DLH_X1..
+Finding unused cells or wires in module \DLH_X2..
+Finding unused cells or wires in module \DLL_X1..
+Finding unused cells or wires in module \DLL_X2..
+Finding unused cells or wires in module \FA_X1..
+Finding unused cells or wires in module \FILLCELL_X1..
+Finding unused cells or wires in module \FILLCELL_X16..
+Finding unused cells or wires in module \FILLCELL_X2..
+Finding unused cells or wires in module \FILLCELL_X32..
+Finding unused cells or wires in module \FILLCELL_X4..
+Finding unused cells or wires in module \FILLCELL_X8..
+Finding unused cells or wires in module \HA_X1..
+Finding unused cells or wires in module \INV_X1..
+Finding unused cells or wires in module \INV_X16..
+Finding unused cells or wires in module \INV_X2..
+Finding unused cells or wires in module \INV_X32..
+Finding unused cells or wires in module \INV_X4..
+Finding unused cells or wires in module \INV_X8..
+Finding unused cells or wires in module \LOGIC0_X1..
+Finding unused cells or wires in module \LOGIC1_X1..
+Finding unused cells or wires in module \MUX2_X1..
+Finding unused cells or wires in module \MUX2_X2..
+Finding unused cells or wires in module \NAND2_X1..
+Finding unused cells or wires in module \NAND2_X2..
+Finding unused cells or wires in module \NAND2_X4..
+Finding unused cells or wires in module \NAND3_X1..
+Finding unused cells or wires in module \NAND3_X2..
+Finding unused cells or wires in module \NAND3_X4..
+Finding unused cells or wires in module \NAND4_X1..
+Finding unused cells or wires in module \NAND4_X2..
+Finding unused cells or wires in module \NAND4_X4..
+Finding unused cells or wires in module \NOR2_X1..
+Finding unused cells or wires in module \NOR2_X2..
+Finding unused cells or wires in module \NOR2_X4..
+Finding unused cells or wires in module \NOR3_X1..
+Finding unused cells or wires in module \NOR3_X2..
+Finding unused cells or wires in module \NOR3_X4..
+Finding unused cells or wires in module \NOR4_X1..
+Finding unused cells or wires in module \NOR4_X2..
+Finding unused cells or wires in module \NOR4_X4..
+Finding unused cells or wires in module \OAI211_X1..
+Finding unused cells or wires in module \OAI211_X2..
+Finding unused cells or wires in module \OAI211_X4..
+Finding unused cells or wires in module \OAI21_X1..
+Finding unused cells or wires in module \OAI21_X2..
+Finding unused cells or wires in module \OAI21_X4..
+Finding unused cells or wires in module \OAI221_X1..
+Finding unused cells or wires in module \OAI221_X2..
+Finding unused cells or wires in module \OAI221_X4..
+Finding unused cells or wires in module \OAI222_X1..
+Finding unused cells or wires in module \OAI222_X2..
+Finding unused cells or wires in module \OAI222_X4..
+Finding unused cells or wires in module \OAI22_X1..
+Finding unused cells or wires in module \OAI22_X2..
+Finding unused cells or wires in module \OAI22_X4..
+Finding unused cells or wires in module \OAI33_X1..
+Finding unused cells or wires in module \OR2_X1..
+Finding unused cells or wires in module \OR2_X2..
+Finding unused cells or wires in module \OR2_X4..
+Finding unused cells or wires in module \OR3_X1..
+Finding unused cells or wires in module \OR3_X2..
+Finding unused cells or wires in module \OR3_X4..
+Finding unused cells or wires in module \OR4_X1..
+Finding unused cells or wires in module \OR4_X2..
+Finding unused cells or wires in module \OR4_X4..
+Finding unused cells or wires in module \SDFFRS_X1..
+Finding unused cells or wires in module \SDFFRS_X2..
+Finding unused cells or wires in module \SDFFR_X1..
+Finding unused cells or wires in module \SDFFR_X2..
+Finding unused cells or wires in module \SDFFS_X1..
+Finding unused cells or wires in module \SDFFS_X2..
+Finding unused cells or wires in module \SDFF_X1..
+Finding unused cells or wires in module \SDFF_X2..
+Finding unused cells or wires in module \TBUF_X1..
+Finding unused cells or wires in module \TBUF_X16..
+Finding unused cells or wires in module \TBUF_X2..
+Finding unused cells or wires in module \TBUF_X4..
+Finding unused cells or wires in module \TBUF_X8..
+Finding unused cells or wires in module \TINV_X1..
+Finding unused cells or wires in module \TLAT_X1..
+Finding unused cells or wires in module \XNOR2_X1..
+Finding unused cells or wires in module \XNOR2_X2..
+Finding unused cells or wires in module \XOR2_X1..
+Finding unused cells or wires in module \XOR2_X2..
+Finding unused cells or wires in module \tx_uart..
+
+5.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module AND2_X1.
+Optimizing module AND2_X2.
+Optimizing module AND2_X4.
+Optimizing module AND3_X1.
+Optimizing module AND3_X2.
+Optimizing module AND3_X4.
+Optimizing module AND4_X1.
+Optimizing module AND4_X2.
+Optimizing module AND4_X4.
+Optimizing module ANTENNA_X1.
+Optimizing module AOI211_X1.
+Optimizing module AOI211_X2.
+Optimizing module AOI211_X4.
+Optimizing module AOI21_X1.
+Optimizing module AOI21_X2.
+Optimizing module AOI21_X4.
+Optimizing module AOI221_X1.
+Optimizing module AOI221_X2.
+Optimizing module AOI221_X4.
+Optimizing module AOI222_X1.
+Optimizing module AOI222_X2.
+Optimizing module AOI222_X4.
+Optimizing module AOI22_X1.
+Optimizing module AOI22_X2.
+Optimizing module AOI22_X4.
+Optimizing module BUF_X1.
+Optimizing module BUF_X16.
+Optimizing module BUF_X2.
+Optimizing module BUF_X32.
+Optimizing module BUF_X4.
+Optimizing module BUF_X8.
+Optimizing module CLKBUF_X1.
+Optimizing module CLKBUF_X2.
+Optimizing module CLKBUF_X3.
+Optimizing module CLKGATETST_X1.
+Optimizing module CLKGATETST_X2.
+Optimizing module CLKGATETST_X4.
+Optimizing module CLKGATETST_X8.
+Optimizing module CLKGATE_X1.
+Optimizing module CLKGATE_X2.
+Optimizing module CLKGATE_X4.
+Optimizing module CLKGATE_X8.
+Optimizing module DFFRS_X1.
+Optimizing module DFFRS_X2.
+Optimizing module DFFR_X1.
+Optimizing module DFFR_X2.
+Optimizing module DFFS_X1.
+Optimizing module DFFS_X2.
+Optimizing module DFF_X1.
+Optimizing module DFF_X2.
+Optimizing module DLH_X1.
+Optimizing module DLH_X2.
+Optimizing module DLL_X1.
+Optimizing module DLL_X2.
+Optimizing module FA_X1.
+Optimizing module FILLCELL_X1.
+Optimizing module FILLCELL_X16.
+Optimizing module FILLCELL_X2.
+Optimizing module FILLCELL_X32.
+Optimizing module FILLCELL_X4.
+Optimizing module FILLCELL_X8.
+Optimizing module HA_X1.
+Optimizing module INV_X1.
+Optimizing module INV_X16.
+Optimizing module INV_X2.
+Optimizing module INV_X32.
+Optimizing module INV_X4.
+Optimizing module INV_X8.
+Optimizing module LOGIC0_X1.
+Optimizing module LOGIC1_X1.
+Optimizing module MUX2_X1.
+Optimizing module MUX2_X2.
+Optimizing module NAND2_X1.
+Optimizing module NAND2_X2.
+Optimizing module NAND2_X4.
+Optimizing module NAND3_X1.
+Optimizing module NAND3_X2.
+Optimizing module NAND3_X4.
+Optimizing module NAND4_X1.
+Optimizing module NAND4_X2.
+Optimizing module NAND4_X4.
+Optimizing module NOR2_X1.
+Optimizing module NOR2_X2.
+Optimizing module NOR2_X4.
+Optimizing module NOR3_X1.
+Optimizing module NOR3_X2.
+Optimizing module NOR3_X4.
+Optimizing module NOR4_X1.
+Optimizing module NOR4_X2.
+Optimizing module NOR4_X4.
+Optimizing module OAI211_X1.
+Optimizing module OAI211_X2.
+Optimizing module OAI211_X4.
+Optimizing module OAI21_X1.
+Optimizing module OAI21_X2.
+Optimizing module OAI21_X4.
+Optimizing module OAI221_X1.
+Optimizing module OAI221_X2.
+Optimizing module OAI221_X4.
+Optimizing module OAI222_X1.
+Optimizing module OAI222_X2.
+Optimizing module OAI222_X4.
+Optimizing module OAI22_X1.
+Optimizing module OAI22_X2.
+Optimizing module OAI22_X4.
+Optimizing module OAI33_X1.
+Optimizing module OR2_X1.
+Optimizing module OR2_X2.
+Optimizing module OR2_X4.
+Optimizing module OR3_X1.
+Optimizing module OR3_X2.
+Optimizing module OR3_X4.
+Optimizing module OR4_X1.
+Optimizing module OR4_X2.
+Optimizing module OR4_X4.
+Optimizing module SDFFRS_X1.
+Optimizing module SDFFRS_X2.
+Optimizing module SDFFR_X1.
+Optimizing module SDFFR_X2.
+Optimizing module SDFFS_X1.
+Optimizing module SDFFS_X2.
+Optimizing module SDFF_X1.
+Optimizing module SDFF_X2.
+Optimizing module TBUF_X1.
+Optimizing module TBUF_X16.
+Optimizing module TBUF_X2.
+Optimizing module TBUF_X4.
+Optimizing module TBUF_X8.
+Optimizing module TINV_X1.
+Optimizing module TLAT_X1.
+Optimizing module XNOR2_X1.
+Optimizing module XNOR2_X2.
+Optimizing module XOR2_X1.
+Optimizing module XOR2_X2.
+Optimizing module tx_uart.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\AND2_X1'.
+Finding identical cells in module `\AND2_X2'.
+Finding identical cells in module `\AND2_X4'.
+Finding identical cells in module `\AND3_X1'.
+Finding identical cells in module `\AND3_X2'.
+Finding identical cells in module `\AND3_X4'.
+Finding identical cells in module `\AND4_X1'.
+Finding identical cells in module `\AND4_X2'.
+Finding identical cells in module `\AND4_X4'.
+Finding identical cells in module `\ANTENNA_X1'.
+Finding identical cells in module `\AOI211_X1'.
+Finding identical cells in module `\AOI211_X2'.
+Finding identical cells in module `\AOI211_X4'.
+Finding identical cells in module `\AOI21_X1'.
+Finding identical cells in module `\AOI21_X2'.
+Finding identical cells in module `\AOI21_X4'.
+Finding identical cells in module `\AOI221_X1'.
+Finding identical cells in module `\AOI221_X2'.
+Finding identical cells in module `\AOI221_X4'.
+Finding identical cells in module `\AOI222_X1'.
+Finding identical cells in module `\AOI222_X2'.
+Finding identical cells in module `\AOI222_X4'.
+Finding identical cells in module `\AOI22_X1'.
+Finding identical cells in module `\AOI22_X2'.
+Finding identical cells in module `\AOI22_X4'.
+Finding identical cells in module `\BUF_X1'.
+Finding identical cells in module `\BUF_X16'.
+Finding identical cells in module `\BUF_X2'.
+Finding identical cells in module `\BUF_X32'.
+Finding identical cells in module `\BUF_X4'.
+Finding identical cells in module `\BUF_X8'.
+Finding identical cells in module `\CLKBUF_X1'.
+Finding identical cells in module `\CLKBUF_X2'.
+Finding identical cells in module `\CLKBUF_X3'.
+Finding identical cells in module `\CLKGATETST_X1'.
+<suppressed ~9 debug messages>
+Finding identical cells in module `\CLKGATETST_X2'.
+<suppressed ~9 debug messages>
+Finding identical cells in module `\CLKGATETST_X4'.
+<suppressed ~9 debug messages>
+Finding identical cells in module `\CLKGATETST_X8'.
+<suppressed ~9 debug messages>
+Finding identical cells in module `\CLKGATE_X1'.
+Finding identical cells in module `\CLKGATE_X2'.
+Finding identical cells in module `\CLKGATE_X4'.
+Finding identical cells in module `\CLKGATE_X8'.
+Finding identical cells in module `\DFFRS_X1'.
+Finding identical cells in module `\DFFRS_X2'.
+Finding identical cells in module `\DFFR_X1'.
+Finding identical cells in module `\DFFR_X2'.
+Finding identical cells in module `\DFFS_X1'.
+Finding identical cells in module `\DFFS_X2'.
+Finding identical cells in module `\DFF_X1'.
+Finding identical cells in module `\DFF_X2'.
+Finding identical cells in module `\DLH_X1'.
+Finding identical cells in module `\DLH_X2'.
+Finding identical cells in module `\DLL_X1'.
+Finding identical cells in module `\DLL_X2'.
+Finding identical cells in module `\FA_X1'.
+Finding identical cells in module `\FILLCELL_X1'.
+Finding identical cells in module `\FILLCELL_X16'.
+Finding identical cells in module `\FILLCELL_X2'.
+Finding identical cells in module `\FILLCELL_X32'.
+Finding identical cells in module `\FILLCELL_X4'.
+Finding identical cells in module `\FILLCELL_X8'.
+Finding identical cells in module `\HA_X1'.
+Finding identical cells in module `\INV_X1'.
+Finding identical cells in module `\INV_X16'.
+Finding identical cells in module `\INV_X2'.
+Finding identical cells in module `\INV_X32'.
+Finding identical cells in module `\INV_X4'.
+Finding identical cells in module `\INV_X8'.
+Finding identical cells in module `\LOGIC0_X1'.
+Finding identical cells in module `\LOGIC1_X1'.
+Finding identical cells in module `\MUX2_X1'.
+Finding identical cells in module `\MUX2_X2'.
+Finding identical cells in module `\NAND2_X1'.
+Finding identical cells in module `\NAND2_X2'.
+Finding identical cells in module `\NAND2_X4'.
+Finding identical cells in module `\NAND3_X1'.
+Finding identical cells in module `\NAND3_X2'.
+Finding identical cells in module `\NAND3_X4'.
+Finding identical cells in module `\NAND4_X1'.
+Finding identical cells in module `\NAND4_X2'.
+Finding identical cells in module `\NAND4_X4'.
+Finding identical cells in module `\NOR2_X1'.
+Finding identical cells in module `\NOR2_X2'.
+Finding identical cells in module `\NOR2_X4'.
+Finding identical cells in module `\NOR3_X1'.
+Finding identical cells in module `\NOR3_X2'.
+Finding identical cells in module `\NOR3_X4'.
+Finding identical cells in module `\NOR4_X1'.
+Finding identical cells in module `\NOR4_X2'.
+Finding identical cells in module `\NOR4_X4'.
+Finding identical cells in module `\OAI211_X1'.
+Finding identical cells in module `\OAI211_X2'.
+Finding identical cells in module `\OAI211_X4'.
+Finding identical cells in module `\OAI21_X1'.
+Finding identical cells in module `\OAI21_X2'.
+Finding identical cells in module `\OAI21_X4'.
+Finding identical cells in module `\OAI221_X1'.
+Finding identical cells in module `\OAI221_X2'.
+Finding identical cells in module `\OAI221_X4'.
+Finding identical cells in module `\OAI222_X1'.
+Finding identical cells in module `\OAI222_X2'.
+Finding identical cells in module `\OAI222_X4'.
+Finding identical cells in module `\OAI22_X1'.
+Finding identical cells in module `\OAI22_X2'.
+Finding identical cells in module `\OAI22_X4'.
+Finding identical cells in module `\OAI33_X1'.
+Finding identical cells in module `\OR2_X1'.
+Finding identical cells in module `\OR2_X2'.
+Finding identical cells in module `\OR2_X4'.
+Finding identical cells in module `\OR3_X1'.
+Finding identical cells in module `\OR3_X2'.
+Finding identical cells in module `\OR3_X4'.
+Finding identical cells in module `\OR4_X1'.
+Finding identical cells in module `\OR4_X2'.
+Finding identical cells in module `\OR4_X4'.
+Finding identical cells in module `\SDFFRS_X1'.
+Finding identical cells in module `\SDFFRS_X2'.
+Finding identical cells in module `\SDFFR_X1'.
+Finding identical cells in module `\SDFFR_X2'.
+Finding identical cells in module `\SDFFS_X1'.
+Finding identical cells in module `\SDFFS_X2'.
+Finding identical cells in module `\SDFF_X1'.
+Finding identical cells in module `\SDFF_X2'.
+Finding identical cells in module `\TBUF_X1'.
+Finding identical cells in module `\TBUF_X16'.
+Finding identical cells in module `\TBUF_X2'.
+Finding identical cells in module `\TBUF_X4'.
+Finding identical cells in module `\TBUF_X8'.
+Finding identical cells in module `\TINV_X1'.
+Finding identical cells in module `\TLAT_X1'.
+Finding identical cells in module `\XNOR2_X1'.
+Finding identical cells in module `\XNOR2_X2'.
+Finding identical cells in module `\XOR2_X1'.
+Finding identical cells in module `\XOR2_X2'.
+Finding identical cells in module `\tx_uart'.
+<suppressed ~54 debug messages>
+Removed a total of 30 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \AND2_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND2_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND2_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND3_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND3_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND3_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND4_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND4_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND4_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \ANTENNA_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI211_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI211_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI211_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI21_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI21_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI21_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI221_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI221_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI221_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI222_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI222_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI222_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI22_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI22_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI22_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \BUF_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \BUF_X16..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \BUF_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \BUF_X32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \BUF_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \BUF_X8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKBUF_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKBUF_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKBUF_X3..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATETST_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATETST_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATETST_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATETST_X8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATE_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATE_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATE_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATE_X8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFFRS_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFFRS_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFFR_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFFR_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFFS_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFFS_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFF_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFF_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DLH_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DLH_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DLL_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DLL_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \FA_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \FILLCELL_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \FILLCELL_X16..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \FILLCELL_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \FILLCELL_X32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \FILLCELL_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \FILLCELL_X8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \HA_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \INV_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \INV_X16..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \INV_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \INV_X32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \INV_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \INV_X8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \LOGIC0_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \LOGIC1_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \MUX2_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \MUX2_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND2_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND2_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND2_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND3_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND3_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND3_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND4_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND4_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND4_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR2_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR2_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR2_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR3_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR3_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR3_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR4_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR4_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR4_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI211_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI211_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI211_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI21_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI21_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI21_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI221_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI221_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI221_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI222_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI222_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI222_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI22_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI22_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI22_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI33_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR2_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR2_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR2_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR3_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR3_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR3_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR4_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR4_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR4_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFFRS_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFFRS_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFFR_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFFR_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFFS_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFFS_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFF_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFF_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TBUF_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TBUF_X16..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TBUF_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TBUF_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TBUF_X8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TINV_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TLAT_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \XNOR2_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \XNOR2_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \XOR2_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \XOR2_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \tx_uart..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~3 debug messages>
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \AND2_X1.
+  Optimizing cells in module \AND2_X2.
+  Optimizing cells in module \AND2_X4.
+  Optimizing cells in module \AND3_X1.
+  Optimizing cells in module \AND3_X2.
+  Optimizing cells in module \AND3_X4.
+  Optimizing cells in module \AND4_X1.
+  Optimizing cells in module \AND4_X2.
+  Optimizing cells in module \AND4_X4.
+  Optimizing cells in module \ANTENNA_X1.
+  Optimizing cells in module \AOI211_X1.
+  Optimizing cells in module \AOI211_X2.
+  Optimizing cells in module \AOI211_X4.
+  Optimizing cells in module \AOI21_X1.
+  Optimizing cells in module \AOI21_X2.
+  Optimizing cells in module \AOI21_X4.
+  Optimizing cells in module \AOI221_X1.
+  Optimizing cells in module \AOI221_X2.
+  Optimizing cells in module \AOI221_X4.
+  Optimizing cells in module \AOI222_X1.
+  Optimizing cells in module \AOI222_X2.
+  Optimizing cells in module \AOI222_X4.
+  Optimizing cells in module \AOI22_X1.
+  Optimizing cells in module \AOI22_X2.
+  Optimizing cells in module \AOI22_X4.
+  Optimizing cells in module \BUF_X1.
+  Optimizing cells in module \BUF_X16.
+  Optimizing cells in module \BUF_X2.
+  Optimizing cells in module \BUF_X32.
+  Optimizing cells in module \BUF_X4.
+  Optimizing cells in module \BUF_X8.
+  Optimizing cells in module \CLKBUF_X1.
+  Optimizing cells in module \CLKBUF_X2.
+  Optimizing cells in module \CLKBUF_X3.
+  Optimizing cells in module \CLKGATETST_X1.
+  Optimizing cells in module \CLKGATETST_X2.
+  Optimizing cells in module \CLKGATETST_X4.
+  Optimizing cells in module \CLKGATETST_X8.
+  Optimizing cells in module \CLKGATE_X1.
+  Optimizing cells in module \CLKGATE_X2.
+  Optimizing cells in module \CLKGATE_X4.
+  Optimizing cells in module \CLKGATE_X8.
+  Optimizing cells in module \DFFRS_X1.
+  Optimizing cells in module \DFFRS_X2.
+  Optimizing cells in module \DFFR_X1.
+  Optimizing cells in module \DFFR_X2.
+  Optimizing cells in module \DFFS_X1.
+  Optimizing cells in module \DFFS_X2.
+  Optimizing cells in module \DFF_X1.
+  Optimizing cells in module \DFF_X2.
+  Optimizing cells in module \DLH_X1.
+  Optimizing cells in module \DLH_X2.
+  Optimizing cells in module \DLL_X1.
+  Optimizing cells in module \DLL_X2.
+  Optimizing cells in module \FA_X1.
+  Optimizing cells in module \FILLCELL_X1.
+  Optimizing cells in module \FILLCELL_X16.
+  Optimizing cells in module \FILLCELL_X2.
+  Optimizing cells in module \FILLCELL_X32.
+  Optimizing cells in module \FILLCELL_X4.
+  Optimizing cells in module \FILLCELL_X8.
+  Optimizing cells in module \HA_X1.
+  Optimizing cells in module \INV_X1.
+  Optimizing cells in module \INV_X16.
+  Optimizing cells in module \INV_X2.
+  Optimizing cells in module \INV_X32.
+  Optimizing cells in module \INV_X4.
+  Optimizing cells in module \INV_X8.
+  Optimizing cells in module \LOGIC0_X1.
+  Optimizing cells in module \LOGIC1_X1.
+  Optimizing cells in module \MUX2_X1.
+  Optimizing cells in module \MUX2_X2.
+  Optimizing cells in module \NAND2_X1.
+  Optimizing cells in module \NAND2_X2.
+  Optimizing cells in module \NAND2_X4.
+  Optimizing cells in module \NAND3_X1.
+  Optimizing cells in module \NAND3_X2.
+  Optimizing cells in module \NAND3_X4.
+  Optimizing cells in module \NAND4_X1.
+  Optimizing cells in module \NAND4_X2.
+  Optimizing cells in module \NAND4_X4.
+  Optimizing cells in module \NOR2_X1.
+  Optimizing cells in module \NOR2_X2.
+  Optimizing cells in module \NOR2_X4.
+  Optimizing cells in module \NOR3_X1.
+  Optimizing cells in module \NOR3_X2.
+  Optimizing cells in module \NOR3_X4.
+  Optimizing cells in module \NOR4_X1.
+  Optimizing cells in module \NOR4_X2.
+  Optimizing cells in module \NOR4_X4.
+  Optimizing cells in module \OAI211_X1.
+  Optimizing cells in module \OAI211_X2.
+  Optimizing cells in module \OAI211_X4.
+  Optimizing cells in module \OAI21_X1.
+  Optimizing cells in module \OAI21_X2.
+  Optimizing cells in module \OAI21_X4.
+  Optimizing cells in module \OAI221_X1.
+  Optimizing cells in module \OAI221_X2.
+  Optimizing cells in module \OAI221_X4.
+  Optimizing cells in module \OAI222_X1.
+  Optimizing cells in module \OAI222_X2.
+  Optimizing cells in module \OAI222_X4.
+  Optimizing cells in module \OAI22_X1.
+  Optimizing cells in module \OAI22_X2.
+  Optimizing cells in module \OAI22_X4.
+  Optimizing cells in module \OAI33_X1.
+  Optimizing cells in module \OR2_X1.
+  Optimizing cells in module \OR2_X2.
+  Optimizing cells in module \OR2_X4.
+  Optimizing cells in module \OR3_X1.
+  Optimizing cells in module \OR3_X2.
+  Optimizing cells in module \OR3_X4.
+  Optimizing cells in module \OR4_X1.
+  Optimizing cells in module \OR4_X2.
+  Optimizing cells in module \OR4_X4.
+  Optimizing cells in module \SDFFRS_X1.
+  Optimizing cells in module \SDFFRS_X2.
+  Optimizing cells in module \SDFFR_X1.
+  Optimizing cells in module \SDFFR_X2.
+  Optimizing cells in module \SDFFS_X1.
+  Optimizing cells in module \SDFFS_X2.
+  Optimizing cells in module \SDFF_X1.
+  Optimizing cells in module \SDFF_X2.
+  Optimizing cells in module \TBUF_X1.
+  Optimizing cells in module \TBUF_X16.
+  Optimizing cells in module \TBUF_X2.
+  Optimizing cells in module \TBUF_X4.
+  Optimizing cells in module \TBUF_X8.
+  Optimizing cells in module \TINV_X1.
+  Optimizing cells in module \TLAT_X1.
+  Optimizing cells in module \XNOR2_X1.
+  Optimizing cells in module \XNOR2_X2.
+  Optimizing cells in module \XOR2_X1.
+  Optimizing cells in module \XOR2_X2.
+  Optimizing cells in module \tx_uart.
+    New ctrl vector for $pmux cell $procmux$844: { $auto$opt_reduce.cc:134:opt_pmux$871 $procmux$845_CMP }
+  Optimizing cells in module \tx_uart.
+Performed a total of 1 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\AND2_X1'.
+Finding identical cells in module `\AND2_X2'.
+Finding identical cells in module `\AND2_X4'.
+Finding identical cells in module `\AND3_X1'.
+Finding identical cells in module `\AND3_X2'.
+Finding identical cells in module `\AND3_X4'.
+Finding identical cells in module `\AND4_X1'.
+Finding identical cells in module `\AND4_X2'.
+Finding identical cells in module `\AND4_X4'.
+Finding identical cells in module `\ANTENNA_X1'.
+Finding identical cells in module `\AOI211_X1'.
+Finding identical cells in module `\AOI211_X2'.
+Finding identical cells in module `\AOI211_X4'.
+Finding identical cells in module `\AOI21_X1'.
+Finding identical cells in module `\AOI21_X2'.
+Finding identical cells in module `\AOI21_X4'.
+Finding identical cells in module `\AOI221_X1'.
+Finding identical cells in module `\AOI221_X2'.
+Finding identical cells in module `\AOI221_X4'.
+Finding identical cells in module `\AOI222_X1'.
+Finding identical cells in module `\AOI222_X2'.
+Finding identical cells in module `\AOI222_X4'.
+Finding identical cells in module `\AOI22_X1'.
+Finding identical cells in module `\AOI22_X2'.
+Finding identical cells in module `\AOI22_X4'.
+Finding identical cells in module `\BUF_X1'.
+Finding identical cells in module `\BUF_X16'.
+Finding identical cells in module `\BUF_X2'.
+Finding identical cells in module `\BUF_X32'.
+Finding identical cells in module `\BUF_X4'.
+Finding identical cells in module `\BUF_X8'.
+Finding identical cells in module `\CLKBUF_X1'.
+Finding identical cells in module `\CLKBUF_X2'.
+Finding identical cells in module `\CLKBUF_X3'.
+Finding identical cells in module `\CLKGATETST_X1'.
+Finding identical cells in module `\CLKGATETST_X2'.
+Finding identical cells in module `\CLKGATETST_X4'.
+Finding identical cells in module `\CLKGATETST_X8'.
+Finding identical cells in module `\CLKGATE_X1'.
+Finding identical cells in module `\CLKGATE_X2'.
+Finding identical cells in module `\CLKGATE_X4'.
+Finding identical cells in module `\CLKGATE_X8'.
+Finding identical cells in module `\DFFRS_X1'.
+Finding identical cells in module `\DFFRS_X2'.
+Finding identical cells in module `\DFFR_X1'.
+Finding identical cells in module `\DFFR_X2'.
+Finding identical cells in module `\DFFS_X1'.
+Finding identical cells in module `\DFFS_X2'.
+Finding identical cells in module `\DFF_X1'.
+Finding identical cells in module `\DFF_X2'.
+Finding identical cells in module `\DLH_X1'.
+Finding identical cells in module `\DLH_X2'.
+Finding identical cells in module `\DLL_X1'.
+Finding identical cells in module `\DLL_X2'.
+Finding identical cells in module `\FA_X1'.
+Finding identical cells in module `\FILLCELL_X1'.
+Finding identical cells in module `\FILLCELL_X16'.
+Finding identical cells in module `\FILLCELL_X2'.
+Finding identical cells in module `\FILLCELL_X32'.
+Finding identical cells in module `\FILLCELL_X4'.
+Finding identical cells in module `\FILLCELL_X8'.
+Finding identical cells in module `\HA_X1'.
+Finding identical cells in module `\INV_X1'.
+Finding identical cells in module `\INV_X16'.
+Finding identical cells in module `\INV_X2'.
+Finding identical cells in module `\INV_X32'.
+Finding identical cells in module `\INV_X4'.
+Finding identical cells in module `\INV_X8'.
+Finding identical cells in module `\LOGIC0_X1'.
+Finding identical cells in module `\LOGIC1_X1'.
+Finding identical cells in module `\MUX2_X1'.
+Finding identical cells in module `\MUX2_X2'.
+Finding identical cells in module `\NAND2_X1'.
+Finding identical cells in module `\NAND2_X2'.
+Finding identical cells in module `\NAND2_X4'.
+Finding identical cells in module `\NAND3_X1'.
+Finding identical cells in module `\NAND3_X2'.
+Finding identical cells in module `\NAND3_X4'.
+Finding identical cells in module `\NAND4_X1'.
+Finding identical cells in module `\NAND4_X2'.
+Finding identical cells in module `\NAND4_X4'.
+Finding identical cells in module `\NOR2_X1'.
+Finding identical cells in module `\NOR2_X2'.
+Finding identical cells in module `\NOR2_X4'.
+Finding identical cells in module `\NOR3_X1'.
+Finding identical cells in module `\NOR3_X2'.
+Finding identical cells in module `\NOR3_X4'.
+Finding identical cells in module `\NOR4_X1'.
+Finding identical cells in module `\NOR4_X2'.
+Finding identical cells in module `\NOR4_X4'.
+Finding identical cells in module `\OAI211_X1'.
+Finding identical cells in module `\OAI211_X2'.
+Finding identical cells in module `\OAI211_X4'.
+Finding identical cells in module `\OAI21_X1'.
+Finding identical cells in module `\OAI21_X2'.
+Finding identical cells in module `\OAI21_X4'.
+Finding identical cells in module `\OAI221_X1'.
+Finding identical cells in module `\OAI221_X2'.
+Finding identical cells in module `\OAI221_X4'.
+Finding identical cells in module `\OAI222_X1'.
+Finding identical cells in module `\OAI222_X2'.
+Finding identical cells in module `\OAI222_X4'.
+Finding identical cells in module `\OAI22_X1'.
+Finding identical cells in module `\OAI22_X2'.
+Finding identical cells in module `\OAI22_X4'.
+Finding identical cells in module `\OAI33_X1'.
+Finding identical cells in module `\OR2_X1'.
+Finding identical cells in module `\OR2_X2'.
+Finding identical cells in module `\OR2_X4'.
+Finding identical cells in module `\OR3_X1'.
+Finding identical cells in module `\OR3_X2'.
+Finding identical cells in module `\OR3_X4'.
+Finding identical cells in module `\OR4_X1'.
+Finding identical cells in module `\OR4_X2'.
+Finding identical cells in module `\OR4_X4'.
+Finding identical cells in module `\SDFFRS_X1'.
+Finding identical cells in module `\SDFFRS_X2'.
+Finding identical cells in module `\SDFFR_X1'.
+Finding identical cells in module `\SDFFR_X2'.
+Finding identical cells in module `\SDFFS_X1'.
+Finding identical cells in module `\SDFFS_X2'.
+Finding identical cells in module `\SDFF_X1'.
+Finding identical cells in module `\SDFF_X2'.
+Finding identical cells in module `\TBUF_X1'.
+Finding identical cells in module `\TBUF_X16'.
+Finding identical cells in module `\TBUF_X2'.
+Finding identical cells in module `\TBUF_X4'.
+Finding identical cells in module `\TBUF_X8'.
+Finding identical cells in module `\TINV_X1'.
+Finding identical cells in module `\TLAT_X1'.
+Finding identical cells in module `\XNOR2_X1'.
+Finding identical cells in module `\XNOR2_X2'.
+Finding identical cells in module `\XOR2_X1'.
+Finding identical cells in module `\XOR2_X2'.
+Finding identical cells in module `\tx_uart'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding SRST signal on $procdff$867 ($dff) from module tx_uart (D = \bit_cnta, Q = \bit_cnt, rval = 4'0000).
+Adding EN signal on $auto$ff.cc:266:slice$872 ($sdff) from module tx_uart (D = \bit_cnta, Q = \bit_cnt).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \AND2_X1..
+Finding unused cells or wires in module \AND2_X2..
+Finding unused cells or wires in module \AND2_X4..
+Finding unused cells or wires in module \AND3_X1..
+Finding unused cells or wires in module \AND3_X2..
+Finding unused cells or wires in module \AND3_X4..
+Finding unused cells or wires in module \AND4_X1..
+Finding unused cells or wires in module \AND4_X2..
+Finding unused cells or wires in module \AND4_X4..
+Finding unused cells or wires in module \ANTENNA_X1..
+Finding unused cells or wires in module \AOI211_X1..
+Finding unused cells or wires in module \AOI211_X2..
+Finding unused cells or wires in module \AOI211_X4..
+Finding unused cells or wires in module \AOI21_X1..
+Finding unused cells or wires in module \AOI21_X2..
+Finding unused cells or wires in module \AOI21_X4..
+Finding unused cells or wires in module \AOI221_X1..
+Finding unused cells or wires in module \AOI221_X2..
+Finding unused cells or wires in module \AOI221_X4..
+Finding unused cells or wires in module \AOI222_X1..
+Finding unused cells or wires in module \AOI222_X2..
+Finding unused cells or wires in module \AOI222_X4..
+Finding unused cells or wires in module \AOI22_X1..
+Finding unused cells or wires in module \AOI22_X2..
+Finding unused cells or wires in module \AOI22_X4..
+Finding unused cells or wires in module \BUF_X1..
+Finding unused cells or wires in module \BUF_X16..
+Finding unused cells or wires in module \BUF_X2..
+Finding unused cells or wires in module \BUF_X32..
+Finding unused cells or wires in module \BUF_X4..
+Finding unused cells or wires in module \BUF_X8..
+Finding unused cells or wires in module \CLKBUF_X1..
+Finding unused cells or wires in module \CLKBUF_X2..
+Finding unused cells or wires in module \CLKBUF_X3..
+Finding unused cells or wires in module \CLKGATETST_X1..
+Finding unused cells or wires in module \CLKGATETST_X2..
+Finding unused cells or wires in module \CLKGATETST_X4..
+Finding unused cells or wires in module \CLKGATETST_X8..
+Finding unused cells or wires in module \CLKGATE_X1..
+Finding unused cells or wires in module \CLKGATE_X2..
+Finding unused cells or wires in module \CLKGATE_X4..
+Finding unused cells or wires in module \CLKGATE_X8..
+Finding unused cells or wires in module \DFFRS_X1..
+Finding unused cells or wires in module \DFFRS_X2..
+Finding unused cells or wires in module \DFFR_X1..
+Finding unused cells or wires in module \DFFR_X2..
+Finding unused cells or wires in module \DFFS_X1..
+Finding unused cells or wires in module \DFFS_X2..
+Finding unused cells or wires in module \DFF_X1..
+Finding unused cells or wires in module \DFF_X2..
+Finding unused cells or wires in module \DLH_X1..
+Finding unused cells or wires in module \DLH_X2..
+Finding unused cells or wires in module \DLL_X1..
+Finding unused cells or wires in module \DLL_X2..
+Finding unused cells or wires in module \FA_X1..
+Finding unused cells or wires in module \FILLCELL_X1..
+Finding unused cells or wires in module \FILLCELL_X16..
+Finding unused cells or wires in module \FILLCELL_X2..
+Finding unused cells or wires in module \FILLCELL_X32..
+Finding unused cells or wires in module \FILLCELL_X4..
+Finding unused cells or wires in module \FILLCELL_X8..
+Finding unused cells or wires in module \HA_X1..
+Finding unused cells or wires in module \INV_X1..
+Finding unused cells or wires in module \INV_X16..
+Finding unused cells or wires in module \INV_X2..
+Finding unused cells or wires in module \INV_X32..
+Finding unused cells or wires in module \INV_X4..
+Finding unused cells or wires in module \INV_X8..
+Finding unused cells or wires in module \LOGIC0_X1..
+Finding unused cells or wires in module \LOGIC1_X1..
+Finding unused cells or wires in module \MUX2_X1..
+Finding unused cells or wires in module \MUX2_X2..
+Finding unused cells or wires in module \NAND2_X1..
+Finding unused cells or wires in module \NAND2_X2..
+Finding unused cells or wires in module \NAND2_X4..
+Finding unused cells or wires in module \NAND3_X1..
+Finding unused cells or wires in module \NAND3_X2..
+Finding unused cells or wires in module \NAND3_X4..
+Finding unused cells or wires in module \NAND4_X1..
+Finding unused cells or wires in module \NAND4_X2..
+Finding unused cells or wires in module \NAND4_X4..
+Finding unused cells or wires in module \NOR2_X1..
+Finding unused cells or wires in module \NOR2_X2..
+Finding unused cells or wires in module \NOR2_X4..
+Finding unused cells or wires in module \NOR3_X1..
+Finding unused cells or wires in module \NOR3_X2..
+Finding unused cells or wires in module \NOR3_X4..
+Finding unused cells or wires in module \NOR4_X1..
+Finding unused cells or wires in module \NOR4_X2..
+Finding unused cells or wires in module \NOR4_X4..
+Finding unused cells or wires in module \OAI211_X1..
+Finding unused cells or wires in module \OAI211_X2..
+Finding unused cells or wires in module \OAI211_X4..
+Finding unused cells or wires in module \OAI21_X1..
+Finding unused cells or wires in module \OAI21_X2..
+Finding unused cells or wires in module \OAI21_X4..
+Finding unused cells or wires in module \OAI221_X1..
+Finding unused cells or wires in module \OAI221_X2..
+Finding unused cells or wires in module \OAI221_X4..
+Finding unused cells or wires in module \OAI222_X1..
+Finding unused cells or wires in module \OAI222_X2..
+Finding unused cells or wires in module \OAI222_X4..
+Finding unused cells or wires in module \OAI22_X1..
+Finding unused cells or wires in module \OAI22_X2..
+Finding unused cells or wires in module \OAI22_X4..
+Finding unused cells or wires in module \OAI33_X1..
+Finding unused cells or wires in module \OR2_X1..
+Finding unused cells or wires in module \OR2_X2..
+Finding unused cells or wires in module \OR2_X4..
+Finding unused cells or wires in module \OR3_X1..
+Finding unused cells or wires in module \OR3_X2..
+Finding unused cells or wires in module \OR3_X4..
+Finding unused cells or wires in module \OR4_X1..
+Finding unused cells or wires in module \OR4_X2..
+Finding unused cells or wires in module \OR4_X4..
+Finding unused cells or wires in module \SDFFRS_X1..
+Finding unused cells or wires in module \SDFFRS_X2..
+Finding unused cells or wires in module \SDFFR_X1..
+Finding unused cells or wires in module \SDFFR_X2..
+Finding unused cells or wires in module \SDFFS_X1..
+Finding unused cells or wires in module \SDFFS_X2..
+Finding unused cells or wires in module \SDFF_X1..
+Finding unused cells or wires in module \SDFF_X2..
+Finding unused cells or wires in module \TBUF_X1..
+Finding unused cells or wires in module \TBUF_X16..
+Finding unused cells or wires in module \TBUF_X2..
+Finding unused cells or wires in module \TBUF_X4..
+Finding unused cells or wires in module \TBUF_X8..
+Finding unused cells or wires in module \TINV_X1..
+Finding unused cells or wires in module \TLAT_X1..
+Finding unused cells or wires in module \XNOR2_X1..
+Finding unused cells or wires in module \XNOR2_X2..
+Finding unused cells or wires in module \XOR2_X1..
+Finding unused cells or wires in module \XOR2_X2..
+Finding unused cells or wires in module \tx_uart..
+Removed 1 unused cells and 31 unused wires.
+<suppressed ~6 debug messages>
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module AND2_X1.
+Optimizing module AND2_X2.
+Optimizing module AND2_X4.
+Optimizing module AND3_X1.
+Optimizing module AND3_X2.
+Optimizing module AND3_X4.
+Optimizing module AND4_X1.
+Optimizing module AND4_X2.
+Optimizing module AND4_X4.
+Optimizing module ANTENNA_X1.
+Optimizing module AOI211_X1.
+Optimizing module AOI211_X2.
+Optimizing module AOI211_X4.
+Optimizing module AOI21_X1.
+Optimizing module AOI21_X2.
+Optimizing module AOI21_X4.
+Optimizing module AOI221_X1.
+Optimizing module AOI221_X2.
+Optimizing module AOI221_X4.
+Optimizing module AOI222_X1.
+Optimizing module AOI222_X2.
+Optimizing module AOI222_X4.
+Optimizing module AOI22_X1.
+Optimizing module AOI22_X2.
+Optimizing module AOI22_X4.
+Optimizing module BUF_X1.
+Optimizing module BUF_X16.
+Optimizing module BUF_X2.
+Optimizing module BUF_X32.
+Optimizing module BUF_X4.
+Optimizing module BUF_X8.
+Optimizing module CLKBUF_X1.
+Optimizing module CLKBUF_X2.
+Optimizing module CLKBUF_X3.
+Optimizing module CLKGATETST_X1.
+Optimizing module CLKGATETST_X2.
+Optimizing module CLKGATETST_X4.
+Optimizing module CLKGATETST_X8.
+Optimizing module CLKGATE_X1.
+Optimizing module CLKGATE_X2.
+Optimizing module CLKGATE_X4.
+Optimizing module CLKGATE_X8.
+Optimizing module DFFRS_X1.
+Optimizing module DFFRS_X2.
+Optimizing module DFFR_X1.
+Optimizing module DFFR_X2.
+Optimizing module DFFS_X1.
+Optimizing module DFFS_X2.
+Optimizing module DFF_X1.
+Optimizing module DFF_X2.
+Optimizing module DLH_X1.
+Optimizing module DLH_X2.
+Optimizing module DLL_X1.
+Optimizing module DLL_X2.
+Optimizing module FA_X1.
+Optimizing module FILLCELL_X1.
+Optimizing module FILLCELL_X16.
+Optimizing module FILLCELL_X2.
+Optimizing module FILLCELL_X32.
+Optimizing module FILLCELL_X4.
+Optimizing module FILLCELL_X8.
+Optimizing module HA_X1.
+Optimizing module INV_X1.
+Optimizing module INV_X16.
+Optimizing module INV_X2.
+Optimizing module INV_X32.
+Optimizing module INV_X4.
+Optimizing module INV_X8.
+Optimizing module LOGIC0_X1.
+Optimizing module LOGIC1_X1.
+Optimizing module MUX2_X1.
+Optimizing module MUX2_X2.
+Optimizing module NAND2_X1.
+Optimizing module NAND2_X2.
+Optimizing module NAND2_X4.
+Optimizing module NAND3_X1.
+Optimizing module NAND3_X2.
+Optimizing module NAND3_X4.
+Optimizing module NAND4_X1.
+Optimizing module NAND4_X2.
+Optimizing module NAND4_X4.
+Optimizing module NOR2_X1.
+Optimizing module NOR2_X2.
+Optimizing module NOR2_X4.
+Optimizing module NOR3_X1.
+Optimizing module NOR3_X2.
+Optimizing module NOR3_X4.
+Optimizing module NOR4_X1.
+Optimizing module NOR4_X2.
+Optimizing module NOR4_X4.
+Optimizing module OAI211_X1.
+Optimizing module OAI211_X2.
+Optimizing module OAI211_X4.
+Optimizing module OAI21_X1.
+Optimizing module OAI21_X2.
+Optimizing module OAI21_X4.
+Optimizing module OAI221_X1.
+Optimizing module OAI221_X2.
+Optimizing module OAI221_X4.
+Optimizing module OAI222_X1.
+Optimizing module OAI222_X2.
+Optimizing module OAI222_X4.
+Optimizing module OAI22_X1.
+Optimizing module OAI22_X2.
+Optimizing module OAI22_X4.
+Optimizing module OAI33_X1.
+Optimizing module OR2_X1.
+Optimizing module OR2_X2.
+Optimizing module OR2_X4.
+Optimizing module OR3_X1.
+Optimizing module OR3_X2.
+Optimizing module OR3_X4.
+Optimizing module OR4_X1.
+Optimizing module OR4_X2.
+Optimizing module OR4_X4.
+Optimizing module SDFFRS_X1.
+Optimizing module SDFFRS_X2.
+Optimizing module SDFFR_X1.
+Optimizing module SDFFR_X2.
+Optimizing module SDFFS_X1.
+Optimizing module SDFFS_X2.
+Optimizing module SDFF_X1.
+Optimizing module SDFF_X2.
+Optimizing module TBUF_X1.
+Optimizing module TBUF_X16.
+Optimizing module TBUF_X2.
+Optimizing module TBUF_X4.
+Optimizing module TBUF_X8.
+Optimizing module TINV_X1.
+Optimizing module TLAT_X1.
+Optimizing module XNOR2_X1.
+Optimizing module XNOR2_X2.
+Optimizing module XOR2_X1.
+Optimizing module XOR2_X2.
+Optimizing module tx_uart.
+<suppressed ~1 debug messages>
+
+6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \AND2_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND2_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND2_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND3_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND3_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND3_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND4_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND4_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AND4_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \ANTENNA_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI211_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI211_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI211_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI21_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI21_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI21_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI221_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI221_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI221_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI222_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI222_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI222_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI22_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI22_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \AOI22_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \BUF_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \BUF_X16..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \BUF_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \BUF_X32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \BUF_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \BUF_X8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKBUF_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKBUF_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKBUF_X3..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATETST_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATETST_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATETST_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATETST_X8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATE_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATE_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATE_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \CLKGATE_X8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFFRS_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFFRS_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFFR_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFFR_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFFS_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFFS_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFF_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DFF_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DLH_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DLH_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DLL_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \DLL_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \FA_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \FILLCELL_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \FILLCELL_X16..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \FILLCELL_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \FILLCELL_X32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \FILLCELL_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \FILLCELL_X8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \HA_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \INV_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \INV_X16..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \INV_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \INV_X32..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \INV_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \INV_X8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \LOGIC0_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \LOGIC1_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \MUX2_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \MUX2_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND2_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND2_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND2_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND3_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND3_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND3_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND4_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND4_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NAND4_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR2_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR2_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR2_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR3_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR3_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR3_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR4_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR4_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \NOR4_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI211_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI211_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI211_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI21_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI21_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI21_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI221_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI221_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI221_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI222_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI222_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI222_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI22_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI22_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI22_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OAI33_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR2_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR2_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR2_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR3_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR3_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR3_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR4_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR4_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \OR4_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFFRS_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFFRS_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFFR_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFFR_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFFS_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFFS_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFF_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \SDFF_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TBUF_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TBUF_X16..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TBUF_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TBUF_X4..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TBUF_X8..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TINV_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \TLAT_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \XNOR2_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \XNOR2_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \XOR2_X1..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \XOR2_X2..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \tx_uart..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~3 debug messages>
+
+6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \AND2_X1.
+  Optimizing cells in module \AND2_X2.
+  Optimizing cells in module \AND2_X4.
+  Optimizing cells in module \AND3_X1.
+  Optimizing cells in module \AND3_X2.
+  Optimizing cells in module \AND3_X4.
+  Optimizing cells in module \AND4_X1.
+  Optimizing cells in module \AND4_X2.
+  Optimizing cells in module \AND4_X4.
+  Optimizing cells in module \ANTENNA_X1.
+  Optimizing cells in module \AOI211_X1.
+  Optimizing cells in module \AOI211_X2.
+  Optimizing cells in module \AOI211_X4.
+  Optimizing cells in module \AOI21_X1.
+  Optimizing cells in module \AOI21_X2.
+  Optimizing cells in module \AOI21_X4.
+  Optimizing cells in module \AOI221_X1.
+  Optimizing cells in module \AOI221_X2.
+  Optimizing cells in module \AOI221_X4.
+  Optimizing cells in module \AOI222_X1.
+  Optimizing cells in module \AOI222_X2.
+  Optimizing cells in module \AOI222_X4.
+  Optimizing cells in module \AOI22_X1.
+  Optimizing cells in module \AOI22_X2.
+  Optimizing cells in module \AOI22_X4.
+  Optimizing cells in module \BUF_X1.
+  Optimizing cells in module \BUF_X16.
+  Optimizing cells in module \BUF_X2.
+  Optimizing cells in module \BUF_X32.
+  Optimizing cells in module \BUF_X4.
+  Optimizing cells in module \BUF_X8.
+  Optimizing cells in module \CLKBUF_X1.
+  Optimizing cells in module \CLKBUF_X2.
+  Optimizing cells in module \CLKBUF_X3.
+  Optimizing cells in module \CLKGATETST_X1.
+  Optimizing cells in module \CLKGATETST_X2.
+  Optimizing cells in module \CLKGATETST_X4.
+  Optimizing cells in module \CLKGATETST_X8.
+  Optimizing cells in module \CLKGATE_X1.
+  Optimizing cells in module \CLKGATE_X2.
+  Optimizing cells in module \CLKGATE_X4.
+  Optimizing cells in module \CLKGATE_X8.
+  Optimizing cells in module \DFFRS_X1.
+  Optimizing cells in module \DFFRS_X2.
+  Optimizing cells in module \DFFR_X1.
+  Optimizing cells in module \DFFR_X2.
+  Optimizing cells in module \DFFS_X1.
+  Optimizing cells in module \DFFS_X2.
+  Optimizing cells in module \DFF_X1.
+  Optimizing cells in module \DFF_X2.
+  Optimizing cells in module \DLH_X1.
+  Optimizing cells in module \DLH_X2.
+  Optimizing cells in module \DLL_X1.
+  Optimizing cells in module \DLL_X2.
+  Optimizing cells in module \FA_X1.
+  Optimizing cells in module \FILLCELL_X1.
+  Optimizing cells in module \FILLCELL_X16.
+  Optimizing cells in module \FILLCELL_X2.
+  Optimizing cells in module \FILLCELL_X32.
+  Optimizing cells in module \FILLCELL_X4.
+  Optimizing cells in module \FILLCELL_X8.
+  Optimizing cells in module \HA_X1.
+  Optimizing cells in module \INV_X1.
+  Optimizing cells in module \INV_X16.
+  Optimizing cells in module \INV_X2.
+  Optimizing cells in module \INV_X32.
+  Optimizing cells in module \INV_X4.
+  Optimizing cells in module \INV_X8.
+  Optimizing cells in module \LOGIC0_X1.
+  Optimizing cells in module \LOGIC1_X1.
+  Optimizing cells in module \MUX2_X1.
+  Optimizing cells in module \MUX2_X2.
+  Optimizing cells in module \NAND2_X1.
+  Optimizing cells in module \NAND2_X2.
+  Optimizing cells in module \NAND2_X4.
+  Optimizing cells in module \NAND3_X1.
+  Optimizing cells in module \NAND3_X2.
+  Optimizing cells in module \NAND3_X4.
+  Optimizing cells in module \NAND4_X1.
+  Optimizing cells in module \NAND4_X2.
+  Optimizing cells in module \NAND4_X4.
+  Optimizing cells in module \NOR2_X1.
+  Optimizing cells in module \NOR2_X2.
+  Optimizing cells in module \NOR2_X4.
+  Optimizing cells in module \NOR3_X1.
+  Optimizing cells in module \NOR3_X2.
+  Optimizing cells in module \NOR3_X4.
+  Optimizing cells in module \NOR4_X1.
+  Optimizing cells in module \NOR4_X2.
+  Optimizing cells in module \NOR4_X4.
+  Optimizing cells in module \OAI211_X1.
+  Optimizing cells in module \OAI211_X2.
+  Optimizing cells in module \OAI211_X4.
+  Optimizing cells in module \OAI21_X1.
+  Optimizing cells in module \OAI21_X2.
+  Optimizing cells in module \OAI21_X4.
+  Optimizing cells in module \OAI221_X1.
+  Optimizing cells in module \OAI221_X2.
+  Optimizing cells in module \OAI221_X4.
+  Optimizing cells in module \OAI222_X1.
+  Optimizing cells in module \OAI222_X2.
+  Optimizing cells in module \OAI222_X4.
+  Optimizing cells in module \OAI22_X1.
+  Optimizing cells in module \OAI22_X2.
+  Optimizing cells in module \OAI22_X4.
+  Optimizing cells in module \OAI33_X1.
+  Optimizing cells in module \OR2_X1.
+  Optimizing cells in module \OR2_X2.
+  Optimizing cells in module \OR2_X4.
+  Optimizing cells in module \OR3_X1.
+  Optimizing cells in module \OR3_X2.
+  Optimizing cells in module \OR3_X4.
+  Optimizing cells in module \OR4_X1.
+  Optimizing cells in module \OR4_X2.
+  Optimizing cells in module \OR4_X4.
+  Optimizing cells in module \SDFFRS_X1.
+  Optimizing cells in module \SDFFRS_X2.
+  Optimizing cells in module \SDFFR_X1.
+  Optimizing cells in module \SDFFR_X2.
+  Optimizing cells in module \SDFFS_X1.
+  Optimizing cells in module \SDFFS_X2.
+  Optimizing cells in module \SDFF_X1.
+  Optimizing cells in module \SDFF_X2.
+  Optimizing cells in module \TBUF_X1.
+  Optimizing cells in module \TBUF_X16.
+  Optimizing cells in module \TBUF_X2.
+  Optimizing cells in module \TBUF_X4.
+  Optimizing cells in module \TBUF_X8.
+  Optimizing cells in module \TINV_X1.
+  Optimizing cells in module \TLAT_X1.
+  Optimizing cells in module \XNOR2_X1.
+  Optimizing cells in module \XNOR2_X2.
+  Optimizing cells in module \XOR2_X1.
+  Optimizing cells in module \XOR2_X2.
+  Optimizing cells in module \tx_uart.
+Performed a total of 0 changes.
+
+6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\AND2_X1'.
+Finding identical cells in module `\AND2_X2'.
+Finding identical cells in module `\AND2_X4'.
+Finding identical cells in module `\AND3_X1'.
+Finding identical cells in module `\AND3_X2'.
+Finding identical cells in module `\AND3_X4'.
+Finding identical cells in module `\AND4_X1'.
+Finding identical cells in module `\AND4_X2'.
+Finding identical cells in module `\AND4_X4'.
+Finding identical cells in module `\ANTENNA_X1'.
+Finding identical cells in module `\AOI211_X1'.
+Finding identical cells in module `\AOI211_X2'.
+Finding identical cells in module `\AOI211_X4'.
+Finding identical cells in module `\AOI21_X1'.
+Finding identical cells in module `\AOI21_X2'.
+Finding identical cells in module `\AOI21_X4'.
+Finding identical cells in module `\AOI221_X1'.
+Finding identical cells in module `\AOI221_X2'.
+Finding identical cells in module `\AOI221_X4'.
+Finding identical cells in module `\AOI222_X1'.
+Finding identical cells in module `\AOI222_X2'.
+Finding identical cells in module `\AOI222_X4'.
+Finding identical cells in module `\AOI22_X1'.
+Finding identical cells in module `\AOI22_X2'.
+Finding identical cells in module `\AOI22_X4'.
+Finding identical cells in module `\BUF_X1'.
+Finding identical cells in module `\BUF_X16'.
+Finding identical cells in module `\BUF_X2'.
+Finding identical cells in module `\BUF_X32'.
+Finding identical cells in module `\BUF_X4'.
+Finding identical cells in module `\BUF_X8'.
+Finding identical cells in module `\CLKBUF_X1'.
+Finding identical cells in module `\CLKBUF_X2'.
+Finding identical cells in module `\CLKBUF_X3'.
+Finding identical cells in module `\CLKGATETST_X1'.
+Finding identical cells in module `\CLKGATETST_X2'.
+Finding identical cells in module `\CLKGATETST_X4'.
+Finding identical cells in module `\CLKGATETST_X8'.
+Finding identical cells in module `\CLKGATE_X1'.
+Finding identical cells in module `\CLKGATE_X2'.
+Finding identical cells in module `\CLKGATE_X4'.
+Finding identical cells in module `\CLKGATE_X8'.
+Finding identical cells in module `\DFFRS_X1'.
+Finding identical cells in module `\DFFRS_X2'.
+Finding identical cells in module `\DFFR_X1'.
+Finding identical cells in module `\DFFR_X2'.
+Finding identical cells in module `\DFFS_X1'.
+Finding identical cells in module `\DFFS_X2'.
+Finding identical cells in module `\DFF_X1'.
+Finding identical cells in module `\DFF_X2'.
+Finding identical cells in module `\DLH_X1'.
+Finding identical cells in module `\DLH_X2'.
+Finding identical cells in module `\DLL_X1'.
+Finding identical cells in module `\DLL_X2'.
+Finding identical cells in module `\FA_X1'.
+Finding identical cells in module `\FILLCELL_X1'.
+Finding identical cells in module `\FILLCELL_X16'.
+Finding identical cells in module `\FILLCELL_X2'.
+Finding identical cells in module `\FILLCELL_X32'.
+Finding identical cells in module `\FILLCELL_X4'.
+Finding identical cells in module `\FILLCELL_X8'.
+Finding identical cells in module `\HA_X1'.
+Finding identical cells in module `\INV_X1'.
+Finding identical cells in module `\INV_X16'.
+Finding identical cells in module `\INV_X2'.
+Finding identical cells in module `\INV_X32'.
+Finding identical cells in module `\INV_X4'.
+Finding identical cells in module `\INV_X8'.
+Finding identical cells in module `\LOGIC0_X1'.
+Finding identical cells in module `\LOGIC1_X1'.
+Finding identical cells in module `\MUX2_X1'.
+Finding identical cells in module `\MUX2_X2'.
+Finding identical cells in module `\NAND2_X1'.
+Finding identical cells in module `\NAND2_X2'.
+Finding identical cells in module `\NAND2_X4'.
+Finding identical cells in module `\NAND3_X1'.
+Finding identical cells in module `\NAND3_X2'.
+Finding identical cells in module `\NAND3_X4'.
+Finding identical cells in module `\NAND4_X1'.
+Finding identical cells in module `\NAND4_X2'.
+Finding identical cells in module `\NAND4_X4'.
+Finding identical cells in module `\NOR2_X1'.
+Finding identical cells in module `\NOR2_X2'.
+Finding identical cells in module `\NOR2_X4'.
+Finding identical cells in module `\NOR3_X1'.
+Finding identical cells in module `\NOR3_X2'.
+Finding identical cells in module `\NOR3_X4'.
+Finding identical cells in module `\NOR4_X1'.
+Finding identical cells in module `\NOR4_X2'.
+Finding identical cells in module `\NOR4_X4'.
+Finding identical cells in module `\OAI211_X1'.
+Finding identical cells in module `\OAI211_X2'.
+Finding identical cells in module `\OAI211_X4'.
+Finding identical cells in module `\OAI21_X1'.
+Finding identical cells in module `\OAI21_X2'.
+Finding identical cells in module `\OAI21_X4'.
+Finding identical cells in module `\OAI221_X1'.
+Finding identical cells in module `\OAI221_X2'.
+Finding identical cells in module `\OAI221_X4'.
+Finding identical cells in module `\OAI222_X1'.
+Finding identical cells in module `\OAI222_X2'.
+Finding identical cells in module `\OAI222_X4'.
+Finding identical cells in module `\OAI22_X1'.
+Finding identical cells in module `\OAI22_X2'.
+Finding identical cells in module `\OAI22_X4'.
+Finding identical cells in module `\OAI33_X1'.
+Finding identical cells in module `\OR2_X1'.
+Finding identical cells in module `\OR2_X2'.
+Finding identical cells in module `\OR2_X4'.
+Finding identical cells in module `\OR3_X1'.
+Finding identical cells in module `\OR3_X2'.
+Finding identical cells in module `\OR3_X4'.
+Finding identical cells in module `\OR4_X1'.
+Finding identical cells in module `\OR4_X2'.
+Finding identical cells in module `\OR4_X4'.
+Finding identical cells in module `\SDFFRS_X1'.
+Finding identical cells in module `\SDFFRS_X2'.
+Finding identical cells in module `\SDFFR_X1'.
+Finding identical cells in module `\SDFFR_X2'.
+Finding identical cells in module `\SDFFS_X1'.
+Finding identical cells in module `\SDFFS_X2'.
+Finding identical cells in module `\SDFF_X1'.
+Finding identical cells in module `\SDFF_X2'.
+Finding identical cells in module `\TBUF_X1'.
+Finding identical cells in module `\TBUF_X16'.
+Finding identical cells in module `\TBUF_X2'.
+Finding identical cells in module `\TBUF_X4'.
+Finding identical cells in module `\TBUF_X8'.
+Finding identical cells in module `\TINV_X1'.
+Finding identical cells in module `\TLAT_X1'.
+Finding identical cells in module `\XNOR2_X1'.
+Finding identical cells in module `\XNOR2_X2'.
+Finding identical cells in module `\XOR2_X1'.
+Finding identical cells in module `\XOR2_X2'.
+Finding identical cells in module `\tx_uart'.
+Removed a total of 0 cells.
+
+6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \AND2_X1..
+Finding unused cells or wires in module \AND2_X2..
+Finding unused cells or wires in module \AND2_X4..
+Finding unused cells or wires in module \AND3_X1..
+Finding unused cells or wires in module \AND3_X2..
+Finding unused cells or wires in module \AND3_X4..
+Finding unused cells or wires in module \AND4_X1..
+Finding unused cells or wires in module \AND4_X2..
+Finding unused cells or wires in module \AND4_X4..
+Finding unused cells or wires in module \ANTENNA_X1..
+Finding unused cells or wires in module \AOI211_X1..
+Finding unused cells or wires in module \AOI211_X2..
+Finding unused cells or wires in module \AOI211_X4..
+Finding unused cells or wires in module \AOI21_X1..
+Finding unused cells or wires in module \AOI21_X2..
+Finding unused cells or wires in module \AOI21_X4..
+Finding unused cells or wires in module \AOI221_X1..
+Finding unused cells or wires in module \AOI221_X2..
+Finding unused cells or wires in module \AOI221_X4..
+Finding unused cells or wires in module \AOI222_X1..
+Finding unused cells or wires in module \AOI222_X2..
+Finding unused cells or wires in module \AOI222_X4..
+Finding unused cells or wires in module \AOI22_X1..
+Finding unused cells or wires in module \AOI22_X2..
+Finding unused cells or wires in module \AOI22_X4..
+Finding unused cells or wires in module \BUF_X1..
+Finding unused cells or wires in module \BUF_X16..
+Finding unused cells or wires in module \BUF_X2..
+Finding unused cells or wires in module \BUF_X32..
+Finding unused cells or wires in module \BUF_X4..
+Finding unused cells or wires in module \BUF_X8..
+Finding unused cells or wires in module \CLKBUF_X1..
+Finding unused cells or wires in module \CLKBUF_X2..
+Finding unused cells or wires in module \CLKBUF_X3..
+Finding unused cells or wires in module \CLKGATETST_X1..
+Finding unused cells or wires in module \CLKGATETST_X2..
+Finding unused cells or wires in module \CLKGATETST_X4..
+Finding unused cells or wires in module \CLKGATETST_X8..
+Finding unused cells or wires in module \CLKGATE_X1..
+Finding unused cells or wires in module \CLKGATE_X2..
+Finding unused cells or wires in module \CLKGATE_X4..
+Finding unused cells or wires in module \CLKGATE_X8..
+Finding unused cells or wires in module \DFFRS_X1..
+Finding unused cells or wires in module \DFFRS_X2..
+Finding unused cells or wires in module \DFFR_X1..
+Finding unused cells or wires in module \DFFR_X2..
+Finding unused cells or wires in module \DFFS_X1..
+Finding unused cells or wires in module \DFFS_X2..
+Finding unused cells or wires in module \DFF_X1..
+Finding unused cells or wires in module \DFF_X2..
+Finding unused cells or wires in module \DLH_X1..
+Finding unused cells or wires in module \DLH_X2..
+Finding unused cells or wires in module \DLL_X1..
+Finding unused cells or wires in module \DLL_X2..
+Finding unused cells or wires in module \FA_X1..
+Finding unused cells or wires in module \FILLCELL_X1..
+Finding unused cells or wires in module \FILLCELL_X16..
+Finding unused cells or wires in module \FILLCELL_X2..
+Finding unused cells or wires in module \FILLCELL_X32..
+Finding unused cells or wires in module \FILLCELL_X4..
+Finding unused cells or wires in module \FILLCELL_X8..
+Finding unused cells or wires in module \HA_X1..
+Finding unused cells or wires in module \INV_X1..
+Finding unused cells or wires in module \INV_X16..
+Finding unused cells or wires in module \INV_X2..
+Finding unused cells or wires in module \INV_X32..
+Finding unused cells or wires in module \INV_X4..
+Finding unused cells or wires in module \INV_X8..
+Finding unused cells or wires in module \LOGIC0_X1..
+Finding unused cells or wires in module \LOGIC1_X1..
+Finding unused cells or wires in module \MUX2_X1..
+Finding unused cells or wires in module \MUX2_X2..
+Finding unused cells or wires in module \NAND2_X1..
+Finding unused cells or wires in module \NAND2_X2..
+Finding unused cells or wires in module \NAND2_X4..
+Finding unused cells or wires in module \NAND3_X1..
+Finding unused cells or wires in module \NAND3_X2..
+Finding unused cells or wires in module \NAND3_X4..
+Finding unused cells or wires in module \NAND4_X1..
+Finding unused cells or wires in module \NAND4_X2..
+Finding unused cells or wires in module \NAND4_X4..
+Finding unused cells or wires in module \NOR2_X1..
+Finding unused cells or wires in module \NOR2_X2..
+Finding unused cells or wires in module \NOR2_X4..
+Finding unused cells or wires in module \NOR3_X1..
+Finding unused cells or wires in module \NOR3_X2..
+Finding unused cells or wires in module \NOR3_X4..
+Finding unused cells or wires in module \NOR4_X1..
+Finding unused cells or wires in module \NOR4_X2..
+Finding unused cells or wires in module \NOR4_X4..
+Finding unused cells or wires in module \OAI211_X1..
+Finding unused cells or wires in module \OAI211_X2..
+Finding unused cells or wires in module \OAI211_X4..
+Finding unused cells or wires in module \OAI21_X1..
+Finding unused cells or wires in module \OAI21_X2..
+Finding unused cells or wires in module \OAI21_X4..
+Finding unused cells or wires in module \OAI221_X1..
+Finding unused cells or wires in module \OAI221_X2..
+Finding unused cells or wires in module \OAI221_X4..
+Finding unused cells or wires in module \OAI222_X1..
+Finding unused cells or wires in module \OAI222_X2..
+Finding unused cells or wires in module \OAI222_X4..
+Finding unused cells or wires in module \OAI22_X1..
+Finding unused cells or wires in module \OAI22_X2..
+Finding unused cells or wires in module \OAI22_X4..
+Finding unused cells or wires in module \OAI33_X1..
+Finding unused cells or wires in module \OR2_X1..
+Finding unused cells or wires in module \OR2_X2..
+Finding unused cells or wires in module \OR2_X4..
+Finding unused cells or wires in module \OR3_X1..
+Finding unused cells or wires in module \OR3_X2..
+Finding unused cells or wires in module \OR3_X4..
+Finding unused cells or wires in module \OR4_X1..
+Finding unused cells or wires in module \OR4_X2..
+Finding unused cells or wires in module \OR4_X4..
+Finding unused cells or wires in module \SDFFRS_X1..
+Finding unused cells or wires in module \SDFFRS_X2..
+Finding unused cells or wires in module \SDFFR_X1..
+Finding unused cells or wires in module \SDFFR_X2..
+Finding unused cells or wires in module \SDFFS_X1..
+Finding unused cells or wires in module \SDFFS_X2..
+Finding unused cells or wires in module \SDFF_X1..
+Finding unused cells or wires in module \SDFF_X2..
+Finding unused cells or wires in module \TBUF_X1..
+Finding unused cells or wires in module \TBUF_X16..
+Finding unused cells or wires in module \TBUF_X2..
+Finding unused cells or wires in module \TBUF_X4..
+Finding unused cells or wires in module \TBUF_X8..
+Finding unused cells or wires in module \TINV_X1..
+Finding unused cells or wires in module \TLAT_X1..
+Finding unused cells or wires in module \XNOR2_X1..
+Finding unused cells or wires in module \XNOR2_X2..
+Finding unused cells or wires in module \XOR2_X1..
+Finding unused cells or wires in module \XOR2_X2..
+Finding unused cells or wires in module \tx_uart..
+
+6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module AND2_X1.
+Optimizing module AND2_X2.
+Optimizing module AND2_X4.
+Optimizing module AND3_X1.
+Optimizing module AND3_X2.
+Optimizing module AND3_X4.
+Optimizing module AND4_X1.
+Optimizing module AND4_X2.
+Optimizing module AND4_X4.
+Optimizing module ANTENNA_X1.
+Optimizing module AOI211_X1.
+Optimizing module AOI211_X2.
+Optimizing module AOI211_X4.
+Optimizing module AOI21_X1.
+Optimizing module AOI21_X2.
+Optimizing module AOI21_X4.
+Optimizing module AOI221_X1.
+Optimizing module AOI221_X2.
+Optimizing module AOI221_X4.
+Optimizing module AOI222_X1.
+Optimizing module AOI222_X2.
+Optimizing module AOI222_X4.
+Optimizing module AOI22_X1.
+Optimizing module AOI22_X2.
+Optimizing module AOI22_X4.
+Optimizing module BUF_X1.
+Optimizing module BUF_X16.
+Optimizing module BUF_X2.
+Optimizing module BUF_X32.
+Optimizing module BUF_X4.
+Optimizing module BUF_X8.
+Optimizing module CLKBUF_X1.
+Optimizing module CLKBUF_X2.
+Optimizing module CLKBUF_X3.
+Optimizing module CLKGATETST_X1.
+Optimizing module CLKGATETST_X2.
+Optimizing module CLKGATETST_X4.
+Optimizing module CLKGATETST_X8.
+Optimizing module CLKGATE_X1.
+Optimizing module CLKGATE_X2.
+Optimizing module CLKGATE_X4.
+Optimizing module CLKGATE_X8.
+Optimizing module DFFRS_X1.
+Optimizing module DFFRS_X2.
+Optimizing module DFFR_X1.
+Optimizing module DFFR_X2.
+Optimizing module DFFS_X1.
+Optimizing module DFFS_X2.
+Optimizing module DFF_X1.
+Optimizing module DFF_X2.
+Optimizing module DLH_X1.
+Optimizing module DLH_X2.
+Optimizing module DLL_X1.
+Optimizing module DLL_X2.
+Optimizing module FA_X1.
+Optimizing module FILLCELL_X1.
+Optimizing module FILLCELL_X16.
+Optimizing module FILLCELL_X2.
+Optimizing module FILLCELL_X32.
+Optimizing module FILLCELL_X4.
+Optimizing module FILLCELL_X8.
+Optimizing module HA_X1.
+Optimizing module INV_X1.
+Optimizing module INV_X16.
+Optimizing module INV_X2.
+Optimizing module INV_X32.
+Optimizing module INV_X4.
+Optimizing module INV_X8.
+Optimizing module LOGIC0_X1.
+Optimizing module LOGIC1_X1.
+Optimizing module MUX2_X1.
+Optimizing module MUX2_X2.
+Optimizing module NAND2_X1.
+Optimizing module NAND2_X2.
+Optimizing module NAND2_X4.
+Optimizing module NAND3_X1.
+Optimizing module NAND3_X2.
+Optimizing module NAND3_X4.
+Optimizing module NAND4_X1.
+Optimizing module NAND4_X2.
+Optimizing module NAND4_X4.
+Optimizing module NOR2_X1.
+Optimizing module NOR2_X2.
+Optimizing module NOR2_X4.
+Optimizing module NOR3_X1.
+Optimizing module NOR3_X2.
+Optimizing module NOR3_X4.
+Optimizing module NOR4_X1.
+Optimizing module NOR4_X2.
+Optimizing module NOR4_X4.
+Optimizing module OAI211_X1.
+Optimizing module OAI211_X2.
+Optimizing module OAI211_X4.
+Optimizing module OAI21_X1.
+Optimizing module OAI21_X2.
+Optimizing module OAI21_X4.
+Optimizing module OAI221_X1.
+Optimizing module OAI221_X2.
+Optimizing module OAI221_X4.
+Optimizing module OAI222_X1.
+Optimizing module OAI222_X2.
+Optimizing module OAI222_X4.
+Optimizing module OAI22_X1.
+Optimizing module OAI22_X2.
+Optimizing module OAI22_X4.
+Optimizing module OAI33_X1.
+Optimizing module OR2_X1.
+Optimizing module OR2_X2.
+Optimizing module OR2_X4.
+Optimizing module OR3_X1.
+Optimizing module OR3_X2.
+Optimizing module OR3_X4.
+Optimizing module OR4_X1.
+Optimizing module OR4_X2.
+Optimizing module OR4_X4.
+Optimizing module SDFFRS_X1.
+Optimizing module SDFFRS_X2.
+Optimizing module SDFFR_X1.
+Optimizing module SDFFR_X2.
+Optimizing module SDFFS_X1.
+Optimizing module SDFFS_X2.
+Optimizing module SDFF_X1.
+Optimizing module SDFF_X2.
+Optimizing module TBUF_X1.
+Optimizing module TBUF_X16.
+Optimizing module TBUF_X2.
+Optimizing module TBUF_X4.
+Optimizing module TBUF_X8.
+Optimizing module TINV_X1.
+Optimizing module TLAT_X1.
+Optimizing module XNOR2_X1.
+Optimizing module XNOR2_X2.
+Optimizing module XOR2_X1.
+Optimizing module XOR2_X2.
+Optimizing module tx_uart.
+
+6.16. Finished OPT passes. (There is nothing left to do.)
+
+7. Executing SHARE pass (SAT-based resource sharing).
+
+8. Executing TECHMAP pass (map to technology primitives).
+
+8.1. Executing Verilog-2005 frontend: /usr/local/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/local/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+8.2. Continuing TECHMAP pass.
+Running "alumacc" on wrapper $extern:wrap:$add:A_SIGNED=0:A_WIDTH=4:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=4:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:A_SIGNED=0:A_WIDTH=4:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=4:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:A_SIGNED=0:A_WIDTH=4:B_SIGNED=0:B_WIDTH=1:Y_WIDTH=4:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $eq.
+Using template $paramod$eb7b5fa594d21f32e2ff3bd05b81752f0f326d5f\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $logic_not.
+Using template $paramod$bf2533632d512eac76dd186c0da49367e29b8e98\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $sdffe.
+Using template $paramod$32a7b7b86c07519b7537abc18e96f0331f97914d\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $xor.
+Using template $paramod\_90_lcu\WIDTH=32'00000000000000000000000000000100 for cells of type $lcu.
+Using extmapper simplemap for cells of type $pos.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $or.
+No more expansions possible.
+<suppressed ~299 debug messages>
+
+9. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+Warning: Found unsupported expression 'SE&SI+D&!SE' in pin attribute of cell 'SDFFRS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFRS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X2' - skipping.
+  cell DFF_X1 (noninv, pins=4, area=4.52) is a direct match for cell type $_DFF_P_.
+Warning: Found unsupported expression 'SE&SI+D&!SE' in pin attribute of cell 'SDFFRS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFRS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X2' - skipping.
+  cell DFFR_X1 (noninv, pins=5, area=5.32) is a direct match for cell type $_DFF_PN0_.
+Warning: Found unsupported expression 'SE&SI+D&!SE' in pin attribute of cell 'SDFFRS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFRS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X2' - skipping.
+  cell DFFS_X1 (noninv, pins=5, area=5.32) is a direct match for cell type $_DFF_PN1_.
+Warning: Found unsupported expression 'SE&SI+D&!SE' in pin attribute of cell 'SDFFRS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFRS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X2' - skipping.
+Warning: Found unsupported expression 'SE&SI+D&!SE' in pin attribute of cell 'SDFFRS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFRS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X2' - skipping.
+Warning: Found unsupported expression 'SE&SI+D&!SE' in pin attribute of cell 'SDFFRS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFRS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X2' - skipping.
+  cell DFFRS_X1 (noninv, pins=6, area=6.38) is a direct match for cell type $_DFFSR_PNN_.
+Warning: Found unsupported expression 'SE&SI+D&!SE' in pin attribute of cell 'SDFFRS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFRS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X2' - skipping.
+Warning: Found unsupported expression 'SE&SI+D&!SE' in pin attribute of cell 'SDFFRS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFRS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X2' - skipping.
+Warning: Found unsupported expression 'SE&SI+D&!SE' in pin attribute of cell 'SDFFRS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFRS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFR_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFFS_X2' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X1' - skipping.
+Warning: Found unsupported expression 'SE*SI+D*!SE' in pin attribute of cell 'SDFF_X2' - skipping.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \DFF_X1 _DFF_P_ (.CK( C), .D( D), .Q( Q), .QN(~Q));
+    unmapped dff cell: $_DFF_NN0_
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \DFFR_X1 _DFF_PN0_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .RN( R));
+    \DFFS_X1 _DFF_PN1_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .SN( R));
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    unmapped dff cell: $_DFFSR_NNN_
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    \DFFRS_X1 _DFFSR_PNN_ (.CK( C), .D( D), .Q( Q), .QN(~Q), .RN( R), .SN( S));
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+9.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+Mapping DFF cells in module `\AND2_X1':
+Mapping DFF cells in module `\AND2_X2':
+Mapping DFF cells in module `\AND2_X4':
+Mapping DFF cells in module `\AND3_X1':
+Mapping DFF cells in module `\AND3_X2':
+Mapping DFF cells in module `\AND3_X4':
+Mapping DFF cells in module `\AND4_X1':
+Mapping DFF cells in module `\AND4_X2':
+Mapping DFF cells in module `\AND4_X4':
+Mapping DFF cells in module `\ANTENNA_X1':
+Mapping DFF cells in module `\AOI211_X1':
+Mapping DFF cells in module `\AOI211_X2':
+Mapping DFF cells in module `\AOI211_X4':
+Mapping DFF cells in module `\AOI21_X1':
+Mapping DFF cells in module `\AOI21_X2':
+Mapping DFF cells in module `\AOI21_X4':
+Mapping DFF cells in module `\AOI221_X1':
+Mapping DFF cells in module `\AOI221_X2':
+Mapping DFF cells in module `\AOI221_X4':
+Mapping DFF cells in module `\AOI222_X1':
+Mapping DFF cells in module `\AOI222_X2':
+Mapping DFF cells in module `\AOI222_X4':
+Mapping DFF cells in module `\AOI22_X1':
+Mapping DFF cells in module `\AOI22_X2':
+Mapping DFF cells in module `\AOI22_X4':
+Mapping DFF cells in module `\BUF_X1':
+Mapping DFF cells in module `\BUF_X16':
+Mapping DFF cells in module `\BUF_X2':
+Mapping DFF cells in module `\BUF_X32':
+Mapping DFF cells in module `\BUF_X4':
+Mapping DFF cells in module `\BUF_X8':
+Mapping DFF cells in module `\CLKBUF_X1':
+Mapping DFF cells in module `\CLKBUF_X2':
+Mapping DFF cells in module `\CLKBUF_X3':
+Mapping DFF cells in module `\CLKGATETST_X1':
+Mapping DFF cells in module `\CLKGATETST_X2':
+Mapping DFF cells in module `\CLKGATETST_X4':
+Mapping DFF cells in module `\CLKGATETST_X8':
+Mapping DFF cells in module `\CLKGATE_X1':
+Mapping DFF cells in module `\CLKGATE_X2':
+Mapping DFF cells in module `\CLKGATE_X4':
+Mapping DFF cells in module `\CLKGATE_X8':
+Mapping DFF cells in module `\DFFRS_X1':
+  mapped 1 $_DFFSR_PNN_ cells to \DFFRS_X1 cells.
+Mapping DFF cells in module `\DFFRS_X2':
+  mapped 1 $_DFFSR_PNN_ cells to \DFFRS_X1 cells.
+Mapping DFF cells in module `\DFFR_X1':
+  mapped 1 $_DFF_PN0_ cells to \DFFR_X1 cells.
+Mapping DFF cells in module `\DFFR_X2':
+  mapped 1 $_DFF_PN0_ cells to \DFFR_X1 cells.
+Mapping DFF cells in module `\DFFS_X1':
+  mapped 1 $_DFF_PN1_ cells to \DFFS_X1 cells.
+Mapping DFF cells in module `\DFFS_X2':
+  mapped 1 $_DFF_PN1_ cells to \DFFS_X1 cells.
+Mapping DFF cells in module `\DFF_X1':
+  mapped 1 $_DFF_P_ cells to \DFF_X1 cells.
+Mapping DFF cells in module `\DFF_X2':
+  mapped 1 $_DFF_P_ cells to \DFF_X1 cells.
+Mapping DFF cells in module `\DLH_X1':
+Mapping DFF cells in module `\DLH_X2':
+Mapping DFF cells in module `\DLL_X1':
+Mapping DFF cells in module `\DLL_X2':
+Mapping DFF cells in module `\FA_X1':
+Mapping DFF cells in module `\FILLCELL_X1':
+Mapping DFF cells in module `\FILLCELL_X16':
+Mapping DFF cells in module `\FILLCELL_X2':
+Mapping DFF cells in module `\FILLCELL_X32':
+Mapping DFF cells in module `\FILLCELL_X4':
+Mapping DFF cells in module `\FILLCELL_X8':
+Mapping DFF cells in module `\HA_X1':
+Mapping DFF cells in module `\INV_X1':
+Mapping DFF cells in module `\INV_X16':
+Mapping DFF cells in module `\INV_X2':
+Mapping DFF cells in module `\INV_X32':
+Mapping DFF cells in module `\INV_X4':
+Mapping DFF cells in module `\INV_X8':
+Mapping DFF cells in module `\LOGIC0_X1':
+Mapping DFF cells in module `\LOGIC1_X1':
+Mapping DFF cells in module `\MUX2_X1':
+Mapping DFF cells in module `\MUX2_X2':
+Mapping DFF cells in module `\NAND2_X1':
+Mapping DFF cells in module `\NAND2_X2':
+Mapping DFF cells in module `\NAND2_X4':
+Mapping DFF cells in module `\NAND3_X1':
+Mapping DFF cells in module `\NAND3_X2':
+Mapping DFF cells in module `\NAND3_X4':
+Mapping DFF cells in module `\NAND4_X1':
+Mapping DFF cells in module `\NAND4_X2':
+Mapping DFF cells in module `\NAND4_X4':
+Mapping DFF cells in module `\NOR2_X1':
+Mapping DFF cells in module `\NOR2_X2':
+Mapping DFF cells in module `\NOR2_X4':
+Mapping DFF cells in module `\NOR3_X1':
+Mapping DFF cells in module `\NOR3_X2':
+Mapping DFF cells in module `\NOR3_X4':
+Mapping DFF cells in module `\NOR4_X1':
+Mapping DFF cells in module `\NOR4_X2':
+Mapping DFF cells in module `\NOR4_X4':
+Mapping DFF cells in module `\OAI211_X1':
+Mapping DFF cells in module `\OAI211_X2':
+Mapping DFF cells in module `\OAI211_X4':
+Mapping DFF cells in module `\OAI21_X1':
+Mapping DFF cells in module `\OAI21_X2':
+Mapping DFF cells in module `\OAI21_X4':
+Mapping DFF cells in module `\OAI221_X1':
+Mapping DFF cells in module `\OAI221_X2':
+Mapping DFF cells in module `\OAI221_X4':
+Mapping DFF cells in module `\OAI222_X1':
+Mapping DFF cells in module `\OAI222_X2':
+Mapping DFF cells in module `\OAI222_X4':
+Mapping DFF cells in module `\OAI22_X1':
+Mapping DFF cells in module `\OAI22_X2':
+Mapping DFF cells in module `\OAI22_X4':
+Mapping DFF cells in module `\OAI33_X1':
+Mapping DFF cells in module `\OR2_X1':
+Mapping DFF cells in module `\OR2_X2':
+Mapping DFF cells in module `\OR2_X4':
+Mapping DFF cells in module `\OR3_X1':
+Mapping DFF cells in module `\OR3_X2':
+Mapping DFF cells in module `\OR3_X4':
+Mapping DFF cells in module `\OR4_X1':
+Mapping DFF cells in module `\OR4_X2':
+Mapping DFF cells in module `\OR4_X4':
+Mapping DFF cells in module `\SDFFRS_X1':
+  mapped 1 $_DFFSR_PNN_ cells to \DFFRS_X1 cells.
+Mapping DFF cells in module `\SDFFRS_X2':
+  mapped 1 $_DFFSR_PNN_ cells to \DFFRS_X1 cells.
+Mapping DFF cells in module `\SDFFR_X1':
+  mapped 1 $_DFF_PN0_ cells to \DFFR_X1 cells.
+Mapping DFF cells in module `\SDFFR_X2':
+  mapped 1 $_DFF_PN0_ cells to \DFFR_X1 cells.
+Mapping DFF cells in module `\SDFFS_X1':
+  mapped 1 $_DFF_PN1_ cells to \DFFS_X1 cells.
+Mapping DFF cells in module `\SDFFS_X2':
+  mapped 1 $_DFF_PN1_ cells to \DFFS_X1 cells.
+Mapping DFF cells in module `\SDFF_X1':
+  mapped 1 $_DFF_P_ cells to \DFF_X1 cells.
+Mapping DFF cells in module `\SDFF_X2':
+  mapped 1 $_DFF_P_ cells to \DFF_X1 cells.
+Mapping DFF cells in module `\TBUF_X1':
+Mapping DFF cells in module `\TBUF_X16':
+Mapping DFF cells in module `\TBUF_X2':
+Mapping DFF cells in module `\TBUF_X4':
+Mapping DFF cells in module `\TBUF_X8':
+Mapping DFF cells in module `\TINV_X1':
+Mapping DFF cells in module `\TLAT_X1':
+Mapping DFF cells in module `\XNOR2_X1':
+Mapping DFF cells in module `\XNOR2_X2':
+Mapping DFF cells in module `\XOR2_X1':
+Mapping DFF cells in module `\XOR2_X2':
+Mapping DFF cells in module `\tx_uart':
+  mapped 4 $_DFF_P_ cells to \DFF_X1 cells.
+
+10. Executing ABC pass (technology mapping using ABC).
+
+10.1. Extracting gate netlist of module `\AND2_X1' to `<abc-temp-dir>/input.blif'..
+Extracted 1 gates and 3 wires to a netlist network with 2 inputs and 1 outputs.
+
+10.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /home/ab2003ab/Desktop/NPTEL/OpenROAD/test/Nangate45/Nangate45_typ.lib 
+ABC: Reading SCL library from file "/home/ab2003ab/Desktop/NPTEL/OpenROAD/test/Nangate45/Nangate45_typ.lib" has failed. 
+ABC: ** cmd error: aborting 'source <abc-temp-dir>/abc.script'
+ABC: Parsing finished successfully.  Parsing time =     0.05 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "ANTENNA_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFRS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFRS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFR_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFR_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFFS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DFF_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLH_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLH_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLL_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "DLL_X2".
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X2" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X4" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X8" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X16" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "FILLCELL_X32" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "LOGIC0_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "LOGIC1_X1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFRS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFRS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFR_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFR_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFS_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFFS_X2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFF_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "SDFF_X2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TBUF_X16".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "TINV_X1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "TLAT_X1".
+ABC: Mio_ParseFormula(): The parser cannot find var "IQ & CK))" in the input var list.
+ABC: Memory =   11.38 MB. Time =     0.06 sec
+ERROR: Can't open ABC output file `/tmp/yosys-abc-Gtra9j/output.blif'.
